@@ -1,0 +1,70 @@
+@Backgroud_Green: #44a75e;
+@Backgroud_Purple: #4456a7;
+@Backgroud_Red: #a74444;
+@Backgroud_Black: #474747;
+
+@FONT_SIZE :14px;
+@FONT_SIZE_BG :16px;
+@HEADER_HEIGHT :64px;
+@FONT_WEIGHT :400;
+@BACKGROUND_COLOR: @Backgroud_Purple;
+@BODY_COLOR: #F5F5F7;
+@STYLE_COLOR : #5562F2;
+@BLACK_COLOR: #363940;
+@GRAY: #8F959E;
+
+// 改变背景样式配置
+.theme(@background-color: @BACKGROUND_COLOR) {
+    background-color: @background-color;
+    >main {
+        background-color: @background-color;
+        >footer {
+            background-color: @background-color;
+        }
+    }
+}
+
+//改变背景滤镜样式配置
+.theme-filter(@filter: none) {
+    filter: @filter;
+}
+
+//紫色主题
+.theme-purple {
+    .theme(@background-color: @Backgroud_Purple)
+}
+
+//绿色主题
+.theme-green {
+    .theme(@background-color: @Backgroud_Green)
+}
+
+//红色主题
+.theme-red {
+    .theme(@background-color: @Backgroud_Red)
+}
+
+//黑色主题
+.theme-black {
+    .theme(@background-color: @Backgroud_Black)
+}
+
+//无滤镜
+.theme-filter-none {
+    .theme-filter(@filter: none);
+}
+
+//hue rotate 滤镜
+.theme-filter-hueRotate {
+    .theme-filter(@filter: hue-rotate(180deg); );
+}
+
+//negative 滤镜
+.theme-filter-negative {
+    .theme-filter(@filter: invert(100%); );
+}
+
+//black and white 滤镜
+.theme-filter-grayscale {
+    .theme-filter(@filter: grayscale(100%); );
+}

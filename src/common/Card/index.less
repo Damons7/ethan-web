@@ -1,0 +1,98 @@
+/* Card 卡片 CSS*/
+.ethan-card-3d{
+    /* 3D变形 */
+    transform-style: preserve-3d;
+    perspective: 1000;
+    &:hover {
+      .ethan-card-turn{
+         transform: rotateY(360deg);
+      }
+     
+    }
+}
+.ethan-card-no-3d{
+  transform-style: preserve-3d;
+  perspective: 1000;
+}
+.ethan-card-turn{
+  transition:3s;
+}
+.ethan-card {
+  height: 100%;
+  background-color: #FFF;
+  min-width: 200px;
+  min-height: 200px;
+
+  display: grid;
+  grid-template-rows: 20% auto 20%;
+  border-radius: 20px;
+  background-color: white;
+  color: #1a1a1a;
+  font-weight: bolder;
+  font-size: 18px;
+  border: 4px solid #f6f6f6;
+  box-shadow: 8px 8px 4px #888;
+
+
+  /* header 卡片头部 CSS*/
+  .ethan-card-header {
+    border-radius: 20px 20px 0 0;
+    border-bottom: 2px solid #999;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    /* header title 卡片头部 标题 CSS*/
+    .ethan-card-header-title {
+      box-shadow: 2px 2px 4px #888;
+    }
+
+    /* header title 卡片头部 标题 CSS END*/
+  }
+  .ethan-card-header-left{
+    justify-content: start;
+  }
+  .ethan-card-header-right{
+    justify-content: end;
+  }
+  /* header 卡片头部 CSS END*/
+
+  /* header 卡片主体 CSS */
+  .ethan-card-body {
+    border-radius: 0 0 20px 20px;
+  }
+
+  /* header 卡片主体 CSS END*/
+
+  /* header 卡片尾部 CSS*/
+  .ethan-card-footer {
+    border-top: 2px solid #999;
+    border-radius: 0 0 20px 20px;
+  }
+
+  .no-border{
+    border:none;
+  }
+
+  /* header 卡片尾部 CSS END*/
+}
+/* Card 卡片 内部布局 CSS*/
+.h-a{
+  grid-template-rows: auto 20%;
+}
+.a-f{
+  grid-template-rows: 20% auto;
+}
+.h-a-f{
+  grid-template-rows: 1fr;
+}
+.notes-card{
+  grid-template-rows: 50px auto;
+}
+/* Card 卡片 内部布局 CSS END*/
+
+
+/* Card 卡片 CSS END*/
+
+
+

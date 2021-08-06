@@ -1,0 +1,81 @@
+@Header_Height:50px;
+/* 首页header CSS*/
+header {
+    height: @Header_Height;
+    color: #111;
+    font-weight: bolder;
+    font-size: 18px;
+    background-color: white;
+
+    /* 首页导航nav CSS*/
+    nav {
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        /* 首页LOGO CSS*/
+        img {
+            width: 40px;
+            height: 40px;
+            border-radius: 15%;
+            margin-left: 60px;
+        }
+        /* 首页LOGO CSS END*/
+
+        /* 首页导航标题 CSS*/
+        span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            margin-left: 20px;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            &:hover {
+                &::after {
+                    content: "";
+                    position: absolute;
+                    width: 28px;
+                    height: 28px;
+                    display: block;
+                    z-index: -1;
+                    border: 3px solid #ffd03f;
+                    border-radius: 50%;
+                }
+            }
+        }
+        /* 首页导航标题 CSS END*/
+
+        /* 首页导航标题选中 CSS*/
+        .nav-active{
+           &::after{
+                content: "";
+                display:block;
+                border-radius: 50%;
+                position: absolute;
+                width: 28px;
+                height: 28px;
+                background-color: #ffd03f;
+                z-index: -1;
+                border: 3px solid #ffd03f;
+            }
+        }
+        /* 首页导航标题选中 CSS END*/
+    }
+    /* 首页导航nav CSS END*/
+
+    /* 首页时间显示 CSS*/
+    .header-date {
+        margin-right: 60px;
+
+        /* 首页时间LOGO CSS*/
+        img {
+            width: 40px;
+            height: 40px;
+        }
+        /* 首页时间LOGO CSS END*/
+    }
+    /* 首页时间显示 CSS END*/
+}
+/* 首页header CSS END*/

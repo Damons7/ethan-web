@@ -1,0 +1,45 @@
+@import '@/layout/AppHeader/index.less';
+.mixin-SwitchDivInit() {
+    width: 100%;
+    height: calc(100vh - @Header_Height);
+    position: fixed;
+    z-index: 999;
+    bottom: 0;
+    left: 0;
+}
+
+.mixin-SwitchSpanInit() {
+    display: block;
+    width: 100%;
+    height: calc(100% / 16);
+    background-color: #FFD03F;
+    transition: 0.6s ease-in;
+}
+
+.ethan-animate-enter {
+    .mixin-SwitchDivInit();
+
+    span {
+        .mixin-SwitchSpanInit();
+        transform: scale(1, 1.05);
+        transform-origin: right top;
+    }
+
+    .ethan-active-enter {
+        transform: scale(0, 1.05);
+    }
+}
+
+.ethan-animate-leave {
+    .mixin-SwitchDivInit();
+
+    span {
+        .mixin-SwitchSpanInit();
+        transform: scale(0, 1.05);
+        transform-origin: left top;
+    }
+
+    .ethan-active-leave {
+        transform: scale(1, 1.05);
+    }
+}

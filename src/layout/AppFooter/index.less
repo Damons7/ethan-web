@@ -1,0 +1,34 @@
+/*  底部栏 CSS  */
+footer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #4456a7;
+    border-top: 1px solid black;
+
+    >div {
+        justify-self: center;
+        align-self: center;
+        >span {
+            margin-left: 20px;
+    
+            &:first-child {
+                font-weight: lighter;
+            }
+    
+            &:nth-child(2) {
+                color: #ffd03f;
+                font-weight: bolder;
+            }
+        }
+    }
+
+   
+}
+
+/*  底部栏 CSS END*/

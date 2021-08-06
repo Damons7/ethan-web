@@ -1,0 +1,84 @@
+@import "./normalize.css";
+@import './config.less';
+
+html {
+	line-height: 1.15;
+	text-size-adjust: 100%;
+	width: 100%;
+
+	@media screen and (min-width: 801px) {
+		font-size: 16px
+	}
+
+	@media screen and (max-width: 801px) {
+		font-size: calc(100vw / 750 * 10);
+	}
+
+	// font-size: calc(100vw / 750 * 10);
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+ul,
+li {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	width: 100%;
+	margin: 0;
+	font-family: erikos, Helvetica Neue, Helvetica, Arial, Hiragino Sans GB, Hiragino Sans GB W3, WenQuanYi Micro Hei, sans-serif;
+    // background-color: @BACKGROUND_COLOR;
+	// max-width: 800px;
+	// margin: auto;
+}
+
+.text-c {
+	text-align: center;
+}
+
+.text-l {
+	text-align: left;
+}
+
+.text-r {
+	text-align: right;
+}
+
+.cursor-p {
+	cursor: pointer;
+}
+
+.color-gray {
+	color: #999;
+}
+
+.flex-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.flex-column {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.flex-between {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+ul,
+li {
+	list-style: none;
+}
+
+#__vconsole {
+	display: none;
+}

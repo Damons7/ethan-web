@@ -1,0 +1,81 @@
+/*Moadl CSS*/
+.ethan-modal{
+    display: none;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.1);
+    .ethan-modal-content{
+        position: relative;
+        margin: 15% auto; /*距顶部15% 水平居中*/
+        min-width:calc(100vw/10);
+        max-width:calc(100vw/3);
+        min-height:calc(100vh/3);
+        max-height:calc(100vh/2);
+        animation: topDown .8s;
+        // height: 400px;
+        // width: 400px;
+        display: grid;
+        grid-template-rows: minmax(26px,46px) 1fr minmax(26px,46px);
+        background-color: #e2e2e2;
+        border-radius: 10px;
+        border:1px solid black ;  
+
+        .ethan-modal-header-center{  
+            display: grid;
+            place-items: center;
+            grid-template-columns: 9fr 1fr;
+            border-bottom:2px solid black ;  
+            cursor: move;
+            border-radius: 20px;
+            .ethan-modal-title{
+                font-size: 20px;
+            }
+
+            .ethan-modal-close{
+                cursor: pointer;
+            }
+        }
+        .ethan-modal-header-left{
+            justify-items: start ;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .ethan-modal-body{
+            padding: 20px;
+        }
+        .ethan-modal-footer{
+            display: grid;
+            place-content: center;
+            grid-auto-flow: column;
+            grid-column-gap:20px;
+            border-top: 2px solid #999;
+        }
+        @keyframes topDown {
+            from {top: -300px; opacity: 0}
+            to {top: 0; opacity: 1}
+        }
+    }
+    /*Moadl 定位 CSS*/
+    .ethan-modal-top{
+        margin-top: 1%;
+    }
+    .ethan-modal-left{
+        margin-left:1%;
+    }
+    .ethan-modal-right{
+        margin-right: 1%;
+    }
+    .ethan-modal-bottom{
+        margin: 30% auto;
+    }
+    /*Moadl 定位 CSS END*/
+}
+.ethan-modal-show{
+    display: block;
+}
+/*Moadl CSS END*/

@@ -1,0 +1,51 @@
+/*Tooltip CSS*/
+.ethan-tooltip {
+    position: relative;
+
+    /*Tooltip 气泡框CSS*/
+    .ethan-tooltip-frame {
+        display: none;
+    }
+    /*Tooltip 气泡框CSS END*/
+
+    /*Tooltip hover CSS*/
+    &:hover {
+        /*Tooltip 气泡框hover CSS*/
+        .ethan-tooltip-frame {
+            display: flex;
+            position: absolute;
+            top: 24px;
+            left:-20px; 
+            font-size: 14px;
+            color: white;
+            word-wrap: break-word;
+            word-break: break-all;
+            overflow: hidden;
+
+            /*Tooltip 气泡框圆点 CSS*/
+            .ethan-tooltip-title-round {
+                width: 14px;
+                height: 10px;
+                border-radius: 40%;
+                background-color: yellowgreen;
+                margin: 0 0 6px 12px;
+            }
+            /*Tooltip 气泡框圆点 CSS END*/
+
+            /*Tooltip 气泡框提示语 CSS*/
+            .ethan-tooltip-title {
+                min-width: 90px;
+                min-height: 30px;
+                border-radius:20px  ;
+                padding: 10px;
+                background-color: yellowgreen;
+                z-index: 100;
+                text-align: center;
+            }
+            /*Tooltip 气泡框提示语 CSS END*/
+        }
+        /*Tooltip 气泡框hover CSS END*/
+    }
+    /*Tooltip hover CSS END*/
+}
+/*Tooltip CSS END*/

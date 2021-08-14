@@ -6,31 +6,38 @@
     height: 100%;
     box-sizing: border-box;
     padding: 50px;
-    .notes-card-header{
-        background-color: #D8DCE3;
-    }
-    .notes-card-body{
-        // height: 740px;
-        overflow-y: auto;
-    }
-    .notes-card-nav{
-        margin: 4px;
-        border-radius: 4px;
-        p{
-            text-indent: 2em;
-            padding: 10px 4px;
+    .ethan-notes-card{
+        height:calc(80vh);
+        .notes-card-header{
+            background-color: #D8DCE3;
         }
-
-        span{
-            display: block;
-            color:#999;
-            padding: 8px 4px;
+        .notes-card-body{
+            overflow-y: auto;
+            // max-height:500px;
+            height: 100%;
+            .notes-markdown{
+                padding: 20px 100px 0px 100px;
+            }
         }
+        .notes-card-nav{
+            margin: 4px;
+            border-radius: 4px;
+            p{
+                text-indent: 2em;
+                padding: 10px 4px;
+            }
+    
+            span{
+                display: block;
+                color:#999;
+                padding: 8px 4px;
+            }
+        }
+        /*nav高亮 CSS*/
+        .active-nav{
+            background-color: lightblue;
+        }
+        /*nav高亮 CSS END*/
     }
-    /*nav高亮 CSS*/
-    .active-nav{
-        background-color: lightblue;
-    }
-    /*nav高亮 CSS END*/
 }
 /* 记录notes CSS END*/

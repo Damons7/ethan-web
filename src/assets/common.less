@@ -57,19 +57,22 @@ body {
 	color: #999;
 }
 
-.flex-center {
-	display: flex;
+.grid-center {
+	display: grid;
 	align-items: center;
 	justify-content: center;
 }
 
-.flex-column {
-	display: flex;
-	flex-direction: column;
+.grid-column-center {
+	display: grid;
+	grid-auto-flow: column;
 	align-items: center;
+	justify-content: center;
 }
-.flex-between {
-	display: flex;
+
+.grid-between {
+	display: grid;
+	grid-auto-flow: column;
 	align-items: center;
 	justify-content: space-between;
 }

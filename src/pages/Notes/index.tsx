@@ -37,7 +37,7 @@ export const Notes = () => {
                 {
                     navListConfig.map((item, index) => {
                         return <div
-                            className={`notes-card-nav ${notesTitle === item.title ? 'active-nav' : ''}`}
+                            className={`notes-card-nav cursor-p ${notesTitle === item.title ? 'active-nav' : ''}`}
                             key={index}
                             onClick={() => navListClick(item.title)}
                         >

@@ -3,6 +3,7 @@ import { formatDate } from '@/utils'
 import { useInterval } from '@/hook'
 import { routers } from "@/routers"
 import Date from '@images/date.png'
+import Avatar from '@images/avatar.jpg'
 import { useState, useMemo } from 'react'
 import { useHistory } from "react-router-dom";
 import './index.less'
@@ -66,13 +67,15 @@ export default function AppHeader (props: IAppHeader)  {
   }, [activeIndex, history])
 
   return (
-    <header className='flex-between'>
+    <header className='ethan-header'>
       <nav>
-        <img alt='' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbH0HglbFnJVFUR6EiVr8dPl88G-uT8mFfIg&usqp=CAU' />
+        <div className='ethan-header-avatar'>
+          <img alt='' src={Avatar} />
+        </div>
         {getLinkConfig}
       </nav>
 
-      <div className='header-date flex-between'>
+      <div className='header-date'>
         <img src={Date} alt='' />
         <Tooltip title={time.split(" ")}>
           <span>

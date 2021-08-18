@@ -7,22 +7,13 @@ import {
     AddressCard,
     SkillCard
 } from '@components/Card'
+import {infoConfig} from './config'
 import SwitchAnimate from '@components/SwitchAnimate'
 import React, { useState } from 'react'
 
 import './index.less'
 
 export const About = () => {
-    const infoConfig = {
-        email: "1461264388@qq.com",
-        git: "https://github.com/Damons7",
-        address: {
-            province: "Guang Dong",
-            city: 'Shen Zhen'
-        },
-        skill: ['React', 'TypeScript', 'Koa2', 'MongoDB']
-    }
-
     const [animate, setAnimate] = useState(true)
 
     return (

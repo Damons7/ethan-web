@@ -1,4 +1,9 @@
-import { Home,Notes,About } from "@/pages";
+import {
+    Home,
+    Notes,
+    About,
+    Share
+} from "@/pages";
 
 //路由配置
 const routers = [
@@ -9,7 +14,7 @@ const routers = [
         exact: false,
         name: 'Damons7',
         noRender: true,
-        render: () => <Notes/>
+        render: () => <Notes />
     },
 
     /* ***************首页************* */
@@ -17,7 +22,7 @@ const routers = [
         path: "/home",
         exact: true,
         name: 'Damons7',
-        render: () => <Home/>
+        render: () => <Home />
     },
 
     /* ***************记录************* */
@@ -25,7 +30,7 @@ const routers = [
         path: "/notes",
         exact: false,
         name: '记下录',
-        render: () => <Notes/>
+        render: () => <Notes />
     },
 
     /* ***************分享************* */
@@ -33,14 +38,14 @@ const routers = [
         path: "/share",
         exact: true,
         name: '分享的',
-        render: () => <Notes/>
+        render: () => <Share />
     },
     /* ***************关于************* */
     {
         path: "/about",
         exact: true,
         name: '有关于',
-        render: () => <About/>
+        render: () => <About />
     },
 ]
 

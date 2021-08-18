@@ -7,6 +7,7 @@ import description from '@images/description.png'
 import message from '@images/message.png'
 import angry from '@images/angry.png'
 import fix from '@images/fix.png'
+import sos from '@images/sos.png'
 import SwitchAnimate from '@components/SwitchAnimate'
 import React, { useReducer } from 'react'
 import './index.less'
@@ -22,6 +23,7 @@ type stateType = {
 }
 
 export const Home = () => {
+
     // 初始化state
     const initState: stateType = {
         animate: true,
@@ -80,8 +82,6 @@ export const Home = () => {
 
                 // 默认返回initState初始化
                 case 'init':
-                    console.log(222);
-
                     return {
                         ...initState,
                         animate: false, //入场动画不需要改变
@@ -116,11 +116,11 @@ export const Home = () => {
                         <img src={unlike} alt="" />
                         <span>不行</span>
                     </div>
-                    <div onClick={() => dispatch({ type: 'description' })}>
+                    <div onClick={() => { Message.warn({ msg: "该功能正在抢救中", bottomMsg: "-@#- -%*- -^$-", icon: sos }) }}>
                         <img src={description} alt="" />
                         <span>说明</span>
                     </div>
-                    <div onClick={() => dispatch({ type: 'message' })}>
+                    <div onClick={() => { Message.warn({ msg: "该功能正在抢救中", bottomMsg: "-@#- -%*- -^$-", icon: sos }) }}>
                         <img src={message} alt="" />
                         <span>留言</span>
                     </div>
@@ -133,7 +133,6 @@ export const Home = () => {
                 <Modal visible={state.unlikeVisible} onOk={handleOk} onCancel={() => dispatch({ type: 'init' })}>
 
                 </Modal>
-
 
                 {/* 说明窗口 */}
                 <Modal

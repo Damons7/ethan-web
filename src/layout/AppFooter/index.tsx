@@ -8,8 +8,9 @@ import {
   RainSun,
   CloudSun
 } from '@/components/weatherIcon'
+import { GlobalContext } from '@/layout/AppMain/context'
 import { getWeather } from '@/api'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import './index.less'
 
 type footerConfigType = {
@@ -25,6 +26,10 @@ type weatherTypeConfigType = {
   }
 }
 export default function AppFooder() {
+
+  //获取main中的context
+  const context:any = useContext(GlobalContext);
+    
   //配置文件
   const footerConfig: footerConfigType = {
     base: '深圳',
@@ -49,7 +54,7 @@ export default function AppFooder() {
       path: <Sun />
     },
     cloud: {
-      value: ["多云", "少云", "云","阴"],
+      value: ["多云", "少云", "云", "阴"],
       path: <Cloud />
     },
     cloudSun: {
@@ -91,16 +96,15 @@ export default function AppFooder() {
     }).then(res => {
       const data = res.lives[0];
       if (data) {
-        const imgUrl = getWeatherImgPath(data.weather);
+        const icon = getWeatherImgPath(data.weather);
         const _initToolConfig = { ...initToolConfig };
         _initToolConfig.weather = `天气 ：${data.weather}`;
         _initToolConfig.temperature = `温度 ：${data.temperature}°C`;
         _initToolConfig.windDirection = `${data.winddirection} ${data.windpower}级`;
         _initToolConfig.humidity = `相对湿度 ：${data.humidity}%`;
-        setWeather(imgUrl);
-        setToolConfig(_initToolConfig)
-        console.log(data,'data');
-        
+        setWeather(icon);
+        context.setWeather(icon);
+        setToolConfig(_initToolConfig);
       }
     }).catch(() => console.log);
   }, []);

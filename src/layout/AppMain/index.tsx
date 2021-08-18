@@ -1,5 +1,5 @@
-import { Route, Switch } from "react-router-dom";
 import { routers } from "@/routers"
+import { Route, Switch } from "react-router-dom";
 import './index.less'
 
 export default function AppMain() {

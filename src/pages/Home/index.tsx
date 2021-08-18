@@ -97,7 +97,6 @@ export const Home = () => {
         // dispatch({ type: '' })
         // Message.thank({msg:'THANK U !',bottomMsg:"116"})
     };
-    console.log(state.animate, 'state.animate');
 
     return (
         <React.Fragment>

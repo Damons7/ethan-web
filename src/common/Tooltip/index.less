@@ -14,9 +14,6 @@
         .ethan-tooltip-frame {
             display: grid;
             place-items: center;
-            position: absolute;
-            top: 24px;
-            left:-20px; 
             font-size: 14px;
             color: white;
             word-wrap: break-word;
@@ -29,7 +26,7 @@
                 height: 10px;
                 border-radius: 40%;
                 background-color: yellowgreen;
-                margin: 0 0 6px 12px;
+                margin: 6px 0 6px 12px;
             }
             /*Tooltip 气泡框圆点 CSS END*/
 
@@ -38,15 +35,28 @@
                 min-width: 90px;
                 min-height: 30px;
                 border-radius:20px  ;
-                padding: 10px;
+                padding: 12px;
                 background-color: yellowgreen;
-                z-index: 100;
                 text-align: center;
+                >div{
+                    padding: 2px 0;
+                }
             }
             /*Tooltip 气泡框提示语 CSS END*/
+        }
+
+        .ethan-tooltip-bottom{
+            position: absolute;
+            left:-20px;
+        }
+        .ethan-tooltip-top{
+            position: absolute;
+            bottom: 36px;
+            left:-20px;
         }
         /*Tooltip 气泡框hover CSS END*/
     }
     /*Tooltip hover CSS END*/
+
 }
 /*Tooltip CSS END*/

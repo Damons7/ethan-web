@@ -1,0 +1,48 @@
+.ethan-weather-sun {
+    width: 2.5em;
+    height: 2.5em;
+    margin: -1.25em;
+    background: yellow;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0.375em orange;
+    animation: spin 12s infinite linear;
+    .ethan-weather-sun-rays {
+        position: absolute;
+        top: -2em;
+        left: 50%;
+        display: block;
+        width: 0.375em;
+        height: 1.125em;
+        margin-left: -0.1875em;
+        background: yellow;
+        border-radius: 0.25em;
+        box-shadow: 0 5.375em yellow;
+        
+    }
+
+    .ethan-weather-sun-rays:before,
+    .ethan-weather-sun-rays:after {
+        content: '';
+        position: absolute;
+        top: 0em;
+        left: 0em;
+        display: block;
+        width: 0.375em;
+        height: 1.125em;
+        transform: rotate(60deg);
+        transform-origin: 50% 3.25em;
+        background: yellow;
+        border-radius: 0.25em;
+        box-shadow: 0 5.375em yellow;
+    }
+
+    .ethan-weather-sun-rays:before {
+        transform: rotate(120deg);
+    }
+
+    @keyframes spin {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}

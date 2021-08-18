@@ -1,7 +1,9 @@
 /*  底部栏 CSS  */
+@Footer_Height:80px;
 footer {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    height:@Footer_Height;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -28,9 +30,17 @@ footer {
                 font-weight: bolder;
             }
         }
+        .footer-weather{
+            margin-left: 40px;
+            .footer-weather-content{
+                left:-62px !important;
+            }
+        }
     }
 
    
 }
 
 /*  底部栏 CSS END*/
+
+

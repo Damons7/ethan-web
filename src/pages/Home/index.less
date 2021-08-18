@@ -1,8 +1,9 @@
+@import '@/layout/AppFooter/index.less';
 /* 首页home CSS*/
 .home {
     display: grid;
     grid-auto-flow: column;
-
+    height: calc(100% - @Footer_Height);
     /* 首页介绍 CSS*/
     .home-p {
         font-size: 104px;
@@ -85,6 +86,7 @@
     .home-func {
         display: grid;
         justify-content: right;
+        align-content: center;
         grid-row-gap: 16px;
         padding:20px 60px 0 0 ;
         >div {

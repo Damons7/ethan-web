@@ -8,11 +8,11 @@ import { useState, useMemo } from 'react'
 import { useHistory } from "react-router-dom";
 import './index.less'
 
-interface IAppHeader{
-  isRoute:()=>void
+interface IAppHeader {
+  isRoute: () => void
 }
 
-export default function AppHeader (props: IAppHeader)  {
+export default function AppHeader(props: IAppHeader) {
   const { isRoute } = props
   const time = formatDate(new window.Date(), 'yyyy-MM-dd HH:mm:ss')
 

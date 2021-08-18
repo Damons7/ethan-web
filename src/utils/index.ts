@@ -20,3 +20,23 @@ export const formatDate
             if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         return fmt;
     }
+
+export type getParameterType = {
+    [key: string]: string | number
+}
+//url 参数格式 
+export const getParameter
+    : (data: getParameterType | undefined) => string
+    = data => {
+        let parameter = '';
+        if (data) {
+            let temp = '?';
+            const and = '&';
+            for (const [attr, value] of Object.entries(data)) {
+                temp = temp + `${attr}=${value}` + and;
+            }
+            temp.slice(0, -1); //删除最后一个字符 （&）
+            parameter = temp;
+        }
+        return parameter;
+    }

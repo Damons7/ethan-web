@@ -1,13 +1,13 @@
 /*  底部栏 CSS  */
-@Footer_Height:80px;
+@import '@/assets/config.less';
+
 footer {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    height:@Footer_Height;
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 80px;
+    height: @Footer_Height;
     font-size: 16px;
     font-weight: bold;
     background-color: #4456a7;
@@ -17,30 +17,31 @@ footer {
         place-self: center;
         display: grid;
         grid-auto-flow: column;
-        place-items:center;
+        place-items: center;
+
         >span {
             margin-left: 20px;
-    
+
             &:first-child {
                 font-weight: lighter;
             }
-    
+
             &:nth-child(2) {
                 color: #ffd03f;
                 font-weight: bolder;
             }
         }
-        .footer-weather{
+
+        .footer-weather {
             margin-left: 40px;
-            .footer-weather-content{
-                left:-62px !important;
+
+            .footer-weather-content {
+                left: -62px !important;
             }
         }
     }
 
-   
+
 }
 
 /*  底部栏 CSS END*/
-
-

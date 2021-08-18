@@ -1,4 +1,5 @@
-@import '@/layout/AppFooter/index.less';
+@import '@/assets/config.less';
+
 /* 首页home CSS*/
 .home {
     display: grid;
@@ -26,7 +27,7 @@
                 left: 0;
                 z-index: 2;
                 background: #ffd03f;
-                animation: bgAnimate .6s ease-in-out forwards;
+                animation: bgAnimate 1.8s ease-in-out forwards;
             }
 
             /* 加载动效 CSS END*/
@@ -35,7 +36,7 @@
                 overflow: hidden;
                 white-space: nowrap;
                 width: 14ch;
-                animation: typing 3.5s steps(37, end), blink-caret .75s step-end infinite;
+                animation: typing 4.6s steps(37, end), blink-caret 1.35s step-end infinite;
 
                 @keyframes typing {
                     from {

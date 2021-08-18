@@ -3,7 +3,6 @@ import AppHeader from '@/layout/AppHeader'
 import AppMain from '@/layout/AppMain'
 import { Redirect, Route, Switch, BrowserRouter } from "react-router-dom";
 import SwitchAnimate from '@components/SwitchAnimate'
-import './assets/common.less'
 
 export const App = () => {
 

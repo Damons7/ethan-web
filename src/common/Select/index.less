@@ -25,7 +25,7 @@
 
     /*Select option CSS*/
     .ethan-options {
-        z-index: 111;
+        z-index: -111;
         position: absolute;
         border-radius: 8px;
         top: @height + 4px;
@@ -76,6 +76,7 @@
     .ethan-options-show {
         overflow: visible;
         opacity: 1;
+        z-index: 111;
         div {
             &:nth-of-type(n) {
                 transform: translate3d(0, 0, 0);

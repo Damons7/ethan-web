@@ -114,18 +114,18 @@ export const Select: ParentSelect = (props) => {
     return <SelectContext.Provider value={passedContext}>
         <div
             className={classes}
-            onClick={handleClick}
+            // onClick={handleClick}
             style={width ? { width: Number.isFinite(width) ? width + 'px' : width } : {}}
             {...restProps}
         >
-            <div>{value ? value : natValue}</div>
+            <div onClick={handleClick}>{value ? value : natValue}</div>
             {
                 showArrow ?
                     <img src={selectState.selectIcon ? up : down} alt="" />
                     :
                     null
             }
-            <div className={optionClasses}>
+            <div className={optionClasses} onClick={handleClick}>
                 {children}
             </div>
         </div>

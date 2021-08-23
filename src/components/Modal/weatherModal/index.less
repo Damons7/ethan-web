@@ -1,0 +1,68 @@
+@import '@/assets/config';
+
+/* 天气弹窗 CSS*/
+.weather-modal-body {
+    display: grid;
+    box-sizing: border-box;
+    height: 44vh;
+    width: 25vw;
+    /* 天气弹窗 主体标题 CSS*/
+    .weather-modal-body-title {
+        padding-top: 20px;
+        display: grid;
+        grid-template-columns: 15% 15% 30% 1fr;
+        justify-items: center;
+        height: 25%;
+         /* 天气弹窗 icon CSS*/
+        .weather-icon {
+            padding-top: 18px;
+        }
+        /* 天气弹窗 icon CSS END*/
+
+         /* 天气弹窗 温度 CSS*/
+        .weather-temperature {
+            padding-top: 4px;
+            color: #999;
+            font-weight: bolder;
+            font-size: 24px;
+
+            span {
+                vertical-align: text-top;
+                font-size: 16px;
+            }
+        }
+        /* 天气弹窗 温度 CSS END*/
+
+          /* 天气弹窗 天气详情 CSS */
+        .weather-detail {
+            >div {
+                font-size: 14px;
+                color: #4D5656; 
+                span {
+                    color: #797D7F;
+                    font-size: 16px;
+                }
+            }
+        }
+        /* 天气弹窗 天气详情 CSS END*/
+
+        /* 天气弹窗 城市 CSS END*/
+        .weather-base{
+            display: grid;
+            grid-row-gap: 20px;
+        }
+        .weather-base-city{
+            min-width: 80px;
+            font-size: 14px;
+            min-height: 30px;
+            height: 30px;
+            background-color: #666;
+            justify-content:center ;
+          
+        }
+            /* 天气弹窗 城市 CSS END*/
+         
+    }
+        /* 天气弹窗 主体标题 CSS END*/
+}
+/* 天气弹窗 CSS END*/

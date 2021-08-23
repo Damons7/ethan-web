@@ -40,7 +40,6 @@ export const Option: FC<OptionProps> = (props) => {
     //option点击事件
     const clickHandle = (e: React.MouseEvent) => {
         e.stopPropagation();
-
         if (disabled) return;
 
         const changeOptions: changeOptionsType = {

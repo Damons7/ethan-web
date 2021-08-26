@@ -73,8 +73,14 @@
         /*Select option 禁用模式 CSS END*/
     }
 
+    .ethan-options-notAnimate {
+        display: none;
+    }
+
     .ethan-options-show {
-        overflow: visible;
+        max-height: 300px;
+        max-width: 500px;
+        overflow-y: auto;
         opacity: 1;
         z-index: 111;
         div {
@@ -82,6 +88,10 @@
                 transform: translate3d(0, 0, 0);
             }
         }
+    }
+
+    .ethan-options-show-notAnimate {
+        display: grid;
     }
     /*Select option CSS END*/
 }

@@ -9,6 +9,8 @@ import {
     CloudSun
 } from '@/components/weatherIcon'
 import { Select } from '@/common';
+import { cityConfig } from './config'
+import { useState } from 'react'
 import './index.less'
 
 // initState类型
@@ -21,6 +23,7 @@ interface IWeatherModal {
 
 const WeatherModal = (props: IWeatherModal) => {
     const { Option } = Select;
+    const [cityArr, setCityArr] = useState(cityConfig[0].city)
     const {
         visible = true,
         title = '天气',
@@ -29,6 +32,12 @@ const WeatherModal = (props: IWeatherModal) => {
         ...restProps
     } = props;
 
+    const handleChange
+        : (code: number) => void
+        = code => {
+            const find = cityConfig.find(item => item.baseCode === code) ?? cityConfig[0];
+            setCityArr(find.city)
+        }
     return (
         <Modal
             visible={visible}
@@ -51,11 +60,30 @@ const WeatherModal = (props: IWeatherModal) => {
                         <div>风力：<span>4</span> 级</div>
                     </div>
                     <div className='weather-base'>
-                        <Select className='weather-base-city' showArrow={false}>
-                            <Option>深圳市</Option>
+                        <Select
+                            defaultValue={cityConfig[0].base}
+                            className='weather-base-city'
+                            showArrow={false}
+                            notAnimate={true}
+                            onChange={handleChange}
+                        >
+                            {
+                                cityConfig.map(item => {
+                                    return <Option key={item.base} value={item.baseCode}>{item.base}</Option>
+                                })
+                            }
                         </Select>
-                        <Select className='weather-base-city' showArrow={false}>
-                            <Option>南山区</Option>
+                        <Select
+                            defaultValue={cityArr[0].name}
+                            className='weather-base-city'
+                            showArrow={false}
+                            notAnimate={true}
+                        >
+                            {
+                                cityArr.map(item => {
+                                    return <Option key={item.name} value={item.code}>{item.name}</Option>
+                                })
+                            }
                         </Select>
                         <div>周四下午12:00</div>
                         <div>多云</div>

@@ -22,6 +22,7 @@ interface BaseSelectProps {
     showArrow?: boolean;
     disabled?: boolean;
     className?: string;
+    notAnimate?:boolean;    //  不设置展示动画
     dropdownClassName?: string;
     onDropdownVisibleChange?: changeCallBack;
     onChange?: changeCallBack;
@@ -50,6 +51,7 @@ export const Select: ParentSelect = (props) => {
         value,
         disabled,
         onChange,
+        notAnimate=false,
         onDropdownVisibleChange,
         children,
         ...restProps
@@ -68,8 +70,12 @@ export const Select: ParentSelect = (props) => {
     const classes = classNames("ethan-select", className, {
         "ethan-select-disabled": disabled
     });
+    console.log('selectState.optionVisible||notAnimate',selectState.optionVisible||notAnimate,selectState.optionVisible,notAnimate);
+    
     const optionClasses = classNames("ethan-options", dropdownClassName, {
         "ethan-options-show": selectState.optionVisible,
+        "ethan-options-show-notAnimate": selectState.optionVisible&&notAnimate,
+        "ethan-options-notAnimate":notAnimate,
     });
 
     // 点击select事件
@@ -109,6 +115,7 @@ export const Select: ParentSelect = (props) => {
     const passedContext: ISelectContext = {
         onChange: handleOnChange,
         selectValue: natValue,
+
     };
 
     return <SelectContext.Provider value={passedContext}>

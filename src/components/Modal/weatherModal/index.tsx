@@ -32,7 +32,7 @@ const WeatherModal = (props: IWeatherModal) => {
         ...restProps
     } = props;
 
-    const handleChange
+    const changeBase
         : (code: number) => void
         = code => {
             const find = cityConfig.find(item => item.baseCode === code) ?? cityConfig[0];
@@ -53,6 +53,7 @@ const WeatherModal = (props: IWeatherModal) => {
                     <div className='weather-temperature'>
                         29
                         <span>°C</span>
+                        {/* <div className='weather-time'>周四下午12:00</div> */}
                     </div>
                     <div className='weather-detail'>
                         <div>相对湿度：<span>80</span> %</div>
@@ -65,7 +66,7 @@ const WeatherModal = (props: IWeatherModal) => {
                             className='weather-base-city'
                             showArrow={false}
                             notAnimate={true}
-                            onChange={handleChange}
+                            onChange={changeBase}
                         >
                             {
                                 cityConfig.map(item => {
@@ -85,9 +86,9 @@ const WeatherModal = (props: IWeatherModal) => {
                                 })
                             }
                         </Select>
-                        <div>周四下午12:00</div>
-                        <div>多云</div>
                     </div>
+                    <div>多云</div>
+                    <div className='weather-time'>周四 - 下午12:00</div>
                 </div>
             </div >
         </Modal >

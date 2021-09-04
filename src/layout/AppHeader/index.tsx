@@ -1,10 +1,10 @@
 import { Tooltip } from '@/common'
-import { formatDate } from '@/utils'
+import { formatDate,getDetailDate } from '@/utils'
 import { useInterval } from '@/hook'
 import { routers } from "@/routers"
 import Date from '@images/date.png'
 import Avatar from '@images/avatar.jpg'
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useRef } from 'react'
 import { useHistory } from "react-router-dom";
 import './index.less'
 
@@ -16,15 +16,15 @@ export default function AppHeader(props: IAppHeader) {
   const { isRoute } = props
   const time = formatDate(new window.Date(), 'yyyy-MM-dd HH:mm:ss')
 
-  const [nowTime, setNowTime] = useState(time.split(" ")[1])
+  const [nowTime, setNowTime] = useState(time)
   const [activeIndex, setActiveIndex] = useState(0)
+  let pathName = useRef(window.location.pathname)
+  pathName.current = window.location.pathname
   const history = useHistory();
-  // 路径
-  let pathName = window.location.pathname;
 
   // 设置时间定时器
   useInterval(() => {
-    setNowTime(formatDate(new window.Date(), 'HH:mm:ss'));
+    setNowTime(formatDate(new window.Date(), 'yyyy-MM-dd HH:mm:ss'));
   }, 1000)
 
   const getLinkConfig: (JSX.Element | null)[] = useMemo(() => {
@@ -38,19 +38,18 @@ export default function AppHeader(props: IAppHeader) {
         setActiveIndex(index)
         isRoute && isRoute()
       }
-
     return routers.map((router, index) => {
       const { path, name, noRender } = router;
 
       if (noRender) return null;
 
       let isInitPath = false;
-      if (pathName === '/') {
-        pathName = ''
+      if (pathName.current === '/') {
+        pathName.current = ''
         isInitPath = true;
       }
 
-      if (pathName.length && ~pathName.indexOf(path)) {
+      if (pathName.current.length && ~pathName.current.indexOf(path)) {
         setActiveIndex(index);
       }
 
@@ -64,7 +63,7 @@ export default function AppHeader(props: IAppHeader) {
         </span>
       )
     })
-  }, [activeIndex, history])
+  }, [activeIndex, history,isRoute])
 
   return (
     <header className='ethan-header'>
@@ -77,9 +76,12 @@ export default function AppHeader(props: IAppHeader) {
 
       <div className='header-date'>
         <img src={Date} alt='' />
-        <Tooltip title={time.split(" ")}>
+        <Tooltip title={[
+          ...nowTime.split(" "),
+          `礼拜${getDetailDate(nowTime).week}`
+          ]}>
           <span>
-            {nowTime}
+            {nowTime.split(' ')[1]}
           </span>
         </Tooltip>
       </div>

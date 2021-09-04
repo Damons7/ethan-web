@@ -10,7 +10,6 @@ import {
 } from './config'
 import React, { useState, useEffect } from 'react'
 import './index.less'
-import { Cloud } from '@/components/weatherIcon';
 
 // initState类型
 interface IWeatherModal {
@@ -19,7 +18,6 @@ interface IWeatherModal {
     onCancel: () => void,
     onOk: () => void,
 }
-console.log(getDetailDate(new Date()), 'getDetailDate');
 
 const WeatherModal = (props: IWeatherModal) => {
     const { Option } = Select;
@@ -50,7 +48,6 @@ const WeatherModal = (props: IWeatherModal) => {
         ...restProps
     } = props;
 
-    const test = ['日', '一', '二', '三', '四', '五', '六', '日']
     //更改城市
     const changeBase
         : (baseCode: number) => void
@@ -62,6 +59,7 @@ const WeatherModal = (props: IWeatherModal) => {
 
     //监听地区变化时获取天气信息
     useEffect(() => {
+        //获取实况天气
         getWeather({
             key: weatherApiConfig.key,
             city: cityArr.find(item => item.name === city)?.code ?? cityArr[0].code
@@ -82,14 +80,13 @@ const WeatherModal = (props: IWeatherModal) => {
             }
         }).catch(() => console.log);
 
+        //获取未来天气
         getWeather({
             key: weatherApiConfig.key,
             extensions: 'all',
             city: cityArr.find(item => item.name === city)?.code ?? cityArr[0].code
         }).then(res => {
             const data = res.forecasts[0].casts;
-            console.log(res, 'res');
-
             if (data?.length) {
                 const dateData = data.map((item: any) => {
                     return {
@@ -107,15 +104,12 @@ const WeatherModal = (props: IWeatherModal) => {
                         week: item.week,
                     }
                 })
-                console.log(dateData, 'dateData');
-
                 setWeatherForecast(dateData)
             }
 
         }).catch(() => console.log);
 
     }, [city]);
-
     return (
         <Modal
             visible={visible}
@@ -201,7 +195,7 @@ const WeatherModal = (props: IWeatherModal) => {
                                             `温度 : ${item.nighttemp} °C`,
                                             `${item.nightwind}风 ${item.nightpower}级`,
                                             `日期 : ${item.date}`,
-                                            `星期${test[item.week]}`
+                                            `星期${getDetailDate(item.date).week}`
                                         ]}>
                                         <div className='weather-modal-forecast-info'>
                                             {item.nightImg}

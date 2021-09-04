@@ -50,5 +50,5 @@ class Http {
     }
 }
 
-const http = new Http;
+const http = new Http();
 export default http;

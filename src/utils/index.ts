@@ -95,7 +95,7 @@ export const getDetailDate
         obj.minutes = minutes < 10 ? minutes + '0' : minutes + '';
 
         obj.hours = hours ;
-        obj.week = <string>weekConfig[date.getDay()]
+        obj.week = weekConfig[date.getDay()] as string;
         return obj;
     }
 

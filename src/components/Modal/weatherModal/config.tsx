@@ -1,3 +1,13 @@
+import {
+    Sun,
+    Rain,
+    Cloud,
+    Snow,
+    Lightning,
+    RainSun,
+    CloudSun
+} from '@/components/weatherIcon';
+
 type cityConfigArrType = Array<cityConfigType>
 type cityConfigType = {
     base: string,
@@ -9,7 +19,7 @@ type cityType = {
     code: number
 }
 
-//部分城市地区天气配置
+//部分城市地区配置
 export const cityConfig: cityConfigArrType = [
     {
         base: "深圳市",
@@ -82,3 +92,52 @@ export const cityConfig: cityConfigArrType = [
     },
 ]
 
+export type weatherTypeConfigType = {
+    [key: string]: {
+        value: Array<string>,
+        path: JSX.Element
+    }
+}
+//天气类型 配置
+export const weatherTypeConfig: weatherTypeConfigType = {
+    sun: {
+        value: ["晴", "晴天"],
+        path: <Sun />
+    },
+    cloud: {
+        value: ["多云", "少云", "云", "阴"],
+        path: <Cloud />
+    },
+    cloudSun: {
+        value: ["晴间多云"],
+        path: <CloudSun />
+    },
+    rain: {
+        value: ["雨", "小雨", "阵雨", "大雨", "中雨", '暴雨', "大暴雨", "特大暴雨", "冻雨", "强阵雨", "小雨-中雨", "中雨-大雨",
+            "大雨-暴雨", "暴雨-大暴雨", "大暴雨-特大暴雨", "毛毛雨/细雨", "极端降雨"],
+        path: <Rain />
+    },
+    lightning: {
+        value: ["雷阵雨", '雷阵雨并伴有冰雹', '雷雨', '雷'],
+        path: <Lightning />
+    },
+    snow: {
+        value: ["雪", "大雪", "小雪", "中雪", "暴雪", "小雪-中雪", "中雪-大雪", "大雪-暴雪", "雨雪天气", "雨夹雪", "阵雨夹雪"],
+        path: <Snow />
+    },
+    rainSun: {
+        value: ["雨转晴", "晴转雨", "太阳雨"],
+        path: <RainSun />
+    },
+}
+
+export const weatherApiConfig = {
+    key: "fba995bcb03932d0dac2684e523b0e94" //高德地图key
+}
+
+//获取天气图片 回调
+export const getWeatherImgPath
+    : (data: string) => JSX.Element
+    = data => {
+        return Object.values(weatherTypeConfig).find(item => item.value.includes(data))?.path ?? <Cloud />;
+    }

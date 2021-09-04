@@ -70,7 +70,6 @@ export const Select: ParentSelect = (props) => {
     const classes = classNames("ethan-select", className, {
         "ethan-select-disabled": disabled
     });
-    console.log('selectState.optionVisible||notAnimate',selectState.optionVisible||notAnimate,selectState.optionVisible,notAnimate);
     
     const optionClasses = classNames("ethan-options", dropdownClassName, {
         "ethan-options-show": selectState.optionVisible,

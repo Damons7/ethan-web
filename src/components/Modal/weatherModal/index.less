@@ -4,16 +4,17 @@
 .weather-modal-body {
     display: grid;
     box-sizing: border-box;
-    height: 44vh;
-    width: 25vw;
+    height: 54vh;
+    width: 40vw;
+    grid-template-rows: 38% 1fr;
     /* 天气弹窗 主体标题 CSS*/
     .weather-modal-body-title {
         padding-top: 20px;
         display: grid;
-        grid-template-columns: 15% 20% 35% 1fr;
-        grid-template-rows: 50% 1fr;
+        grid-template-columns: 18% 25% 30% 1fr;
+        grid-template-rows: 33%  33%  33%;
+        grid-column-gap:10px;
         justify-items: center;
-        height: 25%;
          /* 天气弹窗 icon CSS*/
         .weather-icon {
             padding-top: 18px;
@@ -62,12 +63,69 @@
           
         }
             /* 天气弹窗 城市 CSS END*/
+
+            /* 天气弹窗 状态 CSS*/
+            .weather-type{
+                color: #444;
+                font-size: 16px;
+                margin-top: 8px;
+            }
+            /* 天气弹窗 状态 CSS END*/
+
+            /* 天气弹窗 时间 CSS */
             .weather-time{
                 text-align: center;
                 color: #444;
                 font-size: 16px;
+                margin-top: 8px;
             }
+            /* 天气弹窗 时间 CSS END*/
     }
-        /* 天气弹窗 主体标题 CSS END*/
+    /* 天气弹窗 主体标题 CSS END*/
+
+      /* 天气弹窗 主体内容 CSS */
+      .weather-modal-body-content{
+        display: grid;
+        grid-template-rows: 44% 44% 12%;
+        grid-template-columns: repeat(5,20%);
+        grid-auto-flow: column;
+        align-items: center;
+        background-color: lemonchiffon;
+        box-shadow: -8px 8px 4px #888;
+        border-radius: 8px;
+        margin:0 22px 0 26px;
+        .weather-modal-forecast-day{
+            color: #999;
+        }
+        .weather-modal-forecast-info{
+            &:nth-of-type(1n){
+                margin-top: 30px;
+            }
+            &:nth-of-type(2n){
+                margin-bottom: 20px;
+            }
+            >span{
+                display: block;
+                margin-left: 14px;
+                padding-top: 40px;
+                color: #f62549;
+            }
+        }
+        .weather-modal-forecast-date{
+            color: #555;
+            margin-left: 4px;
+            font-style:oblique;
+        }
+
+        .weather-forecast-tipTop-content{
+            left: -46px;
+            bottom: 50px;
+        }
+        .weather-forecast-tipBottom-content{
+            left: -46px;
+            top: 40px;
+        }
+      }
+        /* 天气弹窗 主体内容 CSS END*/
 }
 /* 天气弹窗 CSS END*/

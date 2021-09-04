@@ -96,8 +96,6 @@ export default function AppFooder() {
     }).then(res => {
       const data = res.lives[0];
       if (data) {
-        console.log(data,'data');
-        
         const icon = getWeatherImgPath(data.weather);
         const _initToolConfig = { ...initToolConfig };
         _initToolConfig.weather = `天气 ：${data.weather}`;

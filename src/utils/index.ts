@@ -21,6 +21,84 @@ export const formatDate
         return fmt;
     }
 
+
+type detailDateType = {
+    week: string
+    dayType: {
+        dayTypeName:string,
+        isOver12:boolean
+    },
+    minutes: string
+    hours: number
+}
+// 获取时间详细信息
+export const getDetailDate
+    : (date: Date | string) => detailDateType
+    = date => {
+        const obj: detailDateType = {
+            week: "", //星期
+            dayType: {
+                dayTypeName:"",
+                isOver12:false,
+            },//早中晚
+            hours: 0,//小时
+            minutes: '00' //分钟
+        };
+        if (!date) return obj;
+
+        if (typeof date === 'string') date = new Date(date)
+
+        //星期配置
+        const weekConfig = ['日', '一', '二', '三', '四', '五', '六'];
+
+        //获取早中晚
+        const getDayType
+            : (hours: number) => any
+            = hours => {
+                const dayTypeConfig = {
+                    '午夜': [0],
+                    '半夜': [1, 3],
+                    '凌晨': [4, 5],
+                    '清晨': [6],
+                    '上午': [7, 11],
+                    '中午': [12],
+                    '下午': [13, 16],
+                    '傍晚': [17],
+                    '黄昏': [18],
+                    '晚上': [19, 21],
+                    '深夜': [22, 24]
+                }
+                const dayTypeConfigVal = Object.values(dayTypeConfig);
+                const findIndex = dayTypeConfigVal.findIndex(item => {
+                    if (item.length < 2) {
+                        return item[0] === hours;
+                    }
+                    return hours >= item[0] && hours <= item[1]
+                })
+
+                return ~findIndex ?
+                    {
+                        dayTypeName: Object.keys(dayTypeConfig)[findIndex],
+                        isOVer12: findIndex > 5
+                    }
+                    :
+                    {
+
+                    }
+
+            }
+
+        const minutes = date.getMinutes();//当前时间 分钟
+        const hours = date.getHours();//当前时间 小时
+        obj.dayType = getDayType(hours)
+
+        obj.minutes = minutes < 10 ? minutes + '0' : minutes + '';
+
+        obj.hours = hours ;
+        obj.week = <string>weekConfig[date.getDay()]
+        return obj;
+    }
+
 export type getParameterType = {
     [key: string]: string | number
 }

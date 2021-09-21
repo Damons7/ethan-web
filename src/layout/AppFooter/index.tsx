@@ -10,6 +10,7 @@ import {
 } from '@/components/weatherIcon'
 import { GlobalContext } from '@/layout/AppMain/context'
 import { getWeather } from '@/api'
+import { useHistory } from "react-router-dom";
 import { useEffect, useState, useContext } from 'react'
 import './index.less'
 
@@ -26,10 +27,10 @@ type weatherTypeConfigType = {
   }
 }
 export default function AppFooder() {
-
+  const history = useHistory();
   //获取main中的context
-  const context:any = useContext(GlobalContext);
-    
+  const context: any = useContext(GlobalContext);
+
   //配置文件
   const footerConfig: footerConfigType = {
     base: '深圳',
@@ -144,7 +145,11 @@ export default function AppFooder() {
 
       <div>
         <span>The</span>
-        <span>weather</span>
+        <span style={{ cursor: "pointer" }} onClick={() => {
+          history.push({
+            pathname: '/share',
+          })
+        }}>weather</span>
         <span> →</span>
 
         <Tooltip

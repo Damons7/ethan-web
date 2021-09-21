@@ -34,7 +34,7 @@ const Item = () => {
     }
     // 功能reducer
     const itemReducer
-        : (state: any, action: { type?: string}) => any
+        : (state: any, action: { type?: string }) => any
         = (state, action) => {
             switch (action.type) {
 
@@ -70,7 +70,6 @@ const Item = () => {
                     <span>天气</span>
                 </div>
             </div>
-
             <WeatherModal
                 visible={state.weatherVisible}
                 onOk={() => { dispatch({ type: 'init' }) }}

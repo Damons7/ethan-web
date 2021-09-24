@@ -124,12 +124,9 @@ export const MusicCard = () => {
 
     //播放歌曲
     const onBroadcast = () => {
-        if (state.musicEnd) {
-            dispatch({ type: 'setReStart', reStart: !state.reStart })
-        }
         const audio = audioDom.current;
         audio.paused && audio.play();
-        dispatch({ type: 'setIsBroadcast', isBroadcast: false })
+        state.isBroadcast &&dispatch({ type: 'setIsBroadcast', isBroadcast: false })
     }
 
     //暂停歌曲

@@ -37,6 +37,14 @@ const musicData = [
         src: "https://music.163.com/song/media/outer/url?id=33894312.mp3",
         img: "https://p1.music.126.net/cpoUinrExafBHL5Nv5iDHQ==/109951166361218466.jpg",
         timeLength: 268000
+    },
+    {
+        id: 279103,
+        name: '杀死我的温柔',
+        singer: '麦家瑜',
+        src: "https://music.163.com/song/media/outer/url?id=279103.mp3",
+        img: "https://p2.music.126.net/rw8qSpWiJpkHLmYrFLpRwQ==/109951165083296999.jpg",
+        timeLength: 275000
     }
 ]
 const musicDataLength = musicData.length;
@@ -48,10 +56,9 @@ export const MusicCard = () => {
         isBroadcast: true,
         onPause: true,
         audioDom: "",
-        nowTimeLength: 268000,
         reStart: false,
-        musicEnd: false,
-        nowMusicIndex: 0
+        nowMusicIndex: 0,
+        isShowList: false
     }
     useEffect(() => {
         // audioDom.current.paused && audioDom.current.play()
@@ -60,6 +67,7 @@ export const MusicCard = () => {
         //     });
 
     }, [])
+
     // reducer函数
     const musicCardReducer
         : (state: any, action: any) => any
@@ -90,18 +98,18 @@ export const MusicCard = () => {
                     return {
                         ...state,
                         reStart: action.reStart,
-                        musicEnd: false
-                    }
-                case 'setMusicEnd':
-                    return {
-                        ...state,
-                        musicEnd: action.musicEnd
                     }
                 //设置当前音乐配置
                 case 'setNowMusicIndex':
                     return {
                         ...state,
                         nowMusicIndex: action.nowMusicIndex,
+                    }
+                //设置是否展示音乐列表
+                case 'setIsShowList':
+                    return {
+                        ...state,
+                        isShowList: action.isShowList,
                     }
                 default:
                     return state;
@@ -157,9 +165,10 @@ export const MusicCard = () => {
             setTimeout(() => {
                 onBroadcast()
                 dispatch({ type: "setReStart", reStart: !state.reStart })
-            }, 1000);
+            }, 500);
 
         }
+
     return <div className='ethan-music-card'>
         <img src={musicImg} alt="" onClick={() => { }} />
         <div className={classes}>
@@ -197,14 +206,53 @@ export const MusicCard = () => {
             </div>
             <div className='music-detail-3d'>
                 <div className={detailClasses}>
-                    <div className='music-detail-context'>
-                        <DownIcon
-                            className='music-detail-context-down'
-                        />
-                        <div className='music-detail-context-img'>
-                            <img src={musicData[state.nowMusicIndex].img} alt='' />
-                        </div>
-                    </div>
+                    {
+                        state.isShowList ?
+                            <div className='music-detail-list'>
+                                <UpIcon
+                                    className='music-detail-list-up'
+                                    // onClick={() => { dispatch({ type: "setIsShowList", isShowList: false }) }}
+                                />
+                                {
+                                    musicData.map(item => {
+                                        return (
+                                            <div className='music-detail-list-item'>
+                                                <div>
+                                                    <img src={item.img} alt="" />
+                                                    <div className='music-detail-list-item-info'>
+                                                        <span>{item.name}</span>
+                                                        <span>-- {item.singer}</span>
+                                                    </div>
+                                                </div>
+                                                {
+                                                    state.isBroadcast ?
+                                                        <BroadcastIcon
+                                                            style={{ width: '36px', height: "36px", color: "#333" }}
+                                                            onClick={onBroadcast}
+                                                        />
+                                                        :
+                                                        <PausecastIcon
+                                                            style={{ width: '36px', height: "36px", color: "#333" }}
+                                                            onClick={onPausecast}
+                                                        />
+                                                }
+                                            </div>
+                                        )
+                                    })
+                                }
+
+                            </div>
+                            :
+                            <div className='music-detail-context'>
+                                <DownIcon
+                                    className='music-detail-context-down'
+                                    // onClick={() => { dispatch({ type: "setIsShowList", isShowList: true }) }}
+                                />
+                                <div className='music-detail-context-img'>
+                                    <img src={musicData[state.nowMusicIndex].img} alt='' />
+                                </div>
+                            </div>
+                    }
                     <div className='music-detail-bottom'>
                         <Progress
                             totalTime={musicData[state.nowMusicIndex].timeLength}
@@ -212,33 +260,28 @@ export const MusicCard = () => {
                             className="music-detail-progress"
                             reStart={state.reStart}
                             callback={() => {
-                                dispatch({ type: 'setMusicEnd', musicEnd: true })
                                 changeMusic(1)
                             }}
                         />
                         <div className='music-detail-controls'>
                             <PreviousMusicIcon
-                                style={{ width: '18px', height: "18px", color: "#333" }}
+                                style={{ width: '28px', height: "28px", color: "#333" }}
                                 onClick={() => changeMusic(0)}
                             />
                             {
                                 state.isBroadcast ?
                                     <BroadcastIcon
-                                        style={{ width: '28px', height: "28px", color: "#333" }}
+                                        style={{ width: '36px', height: "36px", color: "#333" }}
                                         onClick={onBroadcast}
                                     />
                                     :
-                                    <PausecastIcon style={{ width: '28px', height: "28px", color: "#333" }}
-                                        onClick={() => {
-                                            //暂停
-                                            const audio = audioDom.current;
-                                            audio.pause();
-                                            dispatch({ type: 'setIsBroadcast', isBroadcast: !state.isBroadcast })
-                                        }}
+                                    <PausecastIcon
+                                        style={{ width: '36px', height: "36px", color: "#333" }}
+                                        onClick={onPausecast}
                                     />
                             }
                             <NextMusicIcon
-                                style={{ width: '18px', height: "18px", color: "#333" }}
+                                style={{ width: '28px', height: "28px", color: "#333" }}
                                 onClick={() => changeMusic(1)}
                             />
                         </div>

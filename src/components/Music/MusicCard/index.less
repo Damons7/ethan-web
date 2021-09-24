@@ -3,6 +3,7 @@
     padding-bottom: 8px;
     padding-right: 6px;
     z-index: 198;
+
     &:hover {
         .music-card {
             transition: all 1.5s ease-in;
@@ -31,7 +32,7 @@
             // background-color: lightgray;
             background: linear-gradient(to bottom, #fff 0%, #ace1ea 100%);
             border: 1px solid lightgrey;
-            width: 220px;
+            width: 290px;
             height: 28px;
             display: grid;
             grid-auto-flow: column;
@@ -99,8 +100,8 @@
         margin-top: 6px;
         opacity: 0;
         z-index: 999;
-        width: 240px;
-        height: 300px;
+        width: 310px;
+        height: 426px;
         border-radius: 10px;
         display: grid;
         transition: all 2s ease-in-out;
@@ -121,16 +122,16 @@
             .music-detail-context-down {
                 position: absolute;
                 top: 12px;
-                left: 12px;
+                left: 10px;
                 width: 24px;
                 height: 24px;
                 color: #048ba2;
             }
 
             .music-detail-context-img {
-                width: 80px;
-                height: 80px;
-                padding: 14px;
+                width: 120px;
+                height: 120px;
+                padding: 20px;
                 border-radius: 50%;
                 background-color: #065f67;
                 animation: spin 30s infinite linear;
@@ -155,6 +156,57 @@
             }
 
 
+        }
+
+        .music-detail-list {
+            position: relative;
+            
+            .music-detail-list-up {
+                position: absolute;
+                bottom: 12px;
+                left: 10px;
+                width: 24px;
+                height: 24px;
+                color: #048ba2;
+            }
+
+            .music-detail-list-item {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 10px 20px 10px 40px;
+
+                >div {
+                    display: flex;
+
+                    .music-detail-list-item-info {
+                        display: flex;
+                        flex-direction: column;
+
+                        span {
+                            font-size: 14px;
+                            word-wrap:break-word; 
+                            word-break:break-all; 
+                            overflow: hidden;/*这个参数根据需要来绝对要不要*/
+                            max-width: 140px;
+                            max-height: 36px;
+
+                            &:last-child {
+                                font-size: 12px;
+                                margin-top: 4px;
+                            }
+                        }
+                    }
+
+                    img {
+                        box-shadow: 4px 4px 18px 4px #F5F5F5;
+                        border-radius: 4px;
+                        width: 48px;
+                        height: 48px;
+                        margin-right: 20px;
+                    }
+                }
+            }
         }
 
         .music-detail-bottom {

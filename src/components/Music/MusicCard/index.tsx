@@ -7,12 +7,12 @@ import './index.less'
 
 const musicData = [
     {
-        id: 33894312,
-        name: '情非得已',
-        singer: '群星',
-        src: "https://music.163.com/song/media/outer/url?id=33894312.mp3",
-        img: "https://p1.music.126.net/cpoUinrExafBHL5Nv5iDHQ==/109951166361218466.jpg",
-        timeLength: 268000
+        id: 1294467974,
+        name: '长沙HOOD',
+        singer: 'KEY.L刘聪 / $CC731',
+        src: "https://music.163.com/song/media/outer/url?id=1294467974.mp3",
+        img: "https://p1.music.126.net/tjs6JyPbZFFSvlkLbSqJzw==/109951163412049985.jpg",
+        timeLength: 244000
     },
     {
         id: 2788529,
@@ -23,14 +23,6 @@ const musicData = [
         timeLength: 239000
     },
     {
-        id: 1294467974,
-        name: '长沙HOOD',
-        singer: 'KEY.L刘聪 / $CC731',
-        src: "https://music.163.com/song/media/outer/url?id=1294467974.mp3",
-        img: "https://p1.music.126.net/tjs6JyPbZFFSvlkLbSqJzw==/109951163412049985.jpg",
-        timeLength: 244000
-    },
-    {
         id: 1819036135,
         name: 'Calling My Phone',
         singer: 'Lil Tjay / 6LACK',
@@ -38,6 +30,14 @@ const musicData = [
         img: "https://p2.music.126.net/A2Myqv8MG489RDVcHXPyWw==/109951165711757957.jpg",
         timeLength: 206000
     },
+    {
+        id: 33894312,
+        name: '情非得已',
+        singer: '群星',
+        src: "https://music.163.com/song/media/outer/url?id=33894312.mp3",
+        img: "https://p1.music.126.net/cpoUinrExafBHL5Nv5iDHQ==/109951166361218466.jpg",
+        timeLength: 268000
+    }
 ]
 const musicDataLength = musicData.length;
 export const MusicCard = () => {
@@ -129,14 +129,14 @@ export const MusicCard = () => {
         // }
         const audio = audioDom.current;
         audio.paused && audio.play();
-        dispatch({ type: 'setIsBroadcast', isBroadcast: !state.isBroadcast })
+        dispatch({ type: 'setIsBroadcast', isBroadcast: false })
     }
 
     //暂停歌曲
     const onPausecast = () => {
         const audio = audioDom.current;
         audio.pause();
-        dispatch({ type: 'setIsBroadcast', isBroadcast: !state.isBroadcast })
+        dispatch({ type: 'setIsBroadcast', isBroadcast: true })
     }
 
     //切换音乐

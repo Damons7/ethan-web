@@ -105,13 +105,6 @@ export const MusicCard = () => {
                         reStart: !state.reStart,
                         musicEnd: false
                     }
-                    case 'setNowMusicIndex2':
-                        return {
-                            ...state,
-                            nowMusicIndex: action.nowMusicIndex,
-                            reStart: !state.reStart,
-                            musicEnd: false
-                        }
                 default:
                     return state;
             }
@@ -131,9 +124,9 @@ export const MusicCard = () => {
 
     //播放歌曲
     const onBroadcast = () => {
-        // if (state.musicEnd) {
-        //     dispatch({ type: 'setReStart', reStart: !state.reStart })
-        // }
+        if (state.musicEnd) {
+            dispatch({ type: 'setReStart', reStart: !state.reStart })
+        }
         const audio = audioDom.current;
         audio.paused && audio.play();
         dispatch({ type: 'setIsBroadcast', isBroadcast: false })
@@ -219,7 +212,7 @@ export const MusicCard = () => {
                             className="music-detail-progress"
                             reStart={state.reStart}
                             callback={() => {
-                                // dispatch({ type: 'setMusicEnd', musicEnd: true })
+                                dispatch({ type: 'setMusicEnd', musicEnd: true })
                                 changeMusic(1)
                             }}
                         />

@@ -84,7 +84,6 @@ export const Progress = (props: ProgressProps) => {
     useEffect(() => {     
         dispatch({ type: "setReStart" })
     }, [reStart])
-    console.log(state.progressWidth,'progressWidth');
     
     useEffect(() => {
         onPause ?

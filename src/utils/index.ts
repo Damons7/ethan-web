@@ -25,8 +25,8 @@ export const formatDate
 type detailDateType = {
     week: string
     dayType: {
-        dayTypeName:string,
-        isOver12:boolean
+        dayTypeName: string,
+        isOver12: boolean
     },
     minutes: string
     hours: number
@@ -38,8 +38,8 @@ export const getDetailDate
         const obj: detailDateType = {
             week: "", //星期
             dayType: {
-                dayTypeName:"",
-                isOver12:false,
+                dayTypeName: "",
+                isOver12: false,
             },//早中晚
             hours: 0,//小时
             minutes: '00' //分钟
@@ -94,7 +94,7 @@ export const getDetailDate
 
         obj.minutes = minutes < 10 ? minutes + '0' : minutes + '';
 
-        obj.hours = hours ;
+        obj.hours = hours;
         obj.week = weekConfig[date.getDay()] as string;
         return obj;
     }
@@ -117,4 +117,21 @@ export const getParameter
             parameter = temp;
         }
         return parameter;
+    }
+
+// 
+export const getTimeLength
+    : (data: number) => string
+    = data => {
+        const _data = Math.floor(data/1000);
+        if(_data<1){
+            return '0:00'
+        }
+        if (_data < 60) {
+            return `0:${_data < 10 ? '0' + _data : _data}`
+        } else {
+            const m = Math.floor(_data / 60);
+            const s = _data - m * 60
+            return m + `:${s<10?'0'+s:s}`;
+        }
     }

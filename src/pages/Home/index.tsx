@@ -104,7 +104,7 @@ export const Home = () => {
                 <section className='home-p'>
                     <p> Welcome My Home ,</p>
                     <p>
-                        I am XXXXXX.li.
+                        I am Ethan.li.☹
                     </p>
                 </section>
                 <section className='home-func'>

@@ -13,6 +13,9 @@ export const MusicCard = () => {
         isBroadcast: true,
         onPause: true,
         audioDom: "",
+        nowTimeLength: 267000,
+        reStart:false,
+        musicEnd: false
     }
     useEffect(() => {
         // audioDom.current.paused && audioDom.current.play()
@@ -46,6 +49,17 @@ export const MusicCard = () => {
                     return {
                         ...state,
                         onPause: action.onPause
+                    }
+                case 'setReStart':
+                    return {
+                        ...state,
+                        reStart: action.reStart,
+                        musicEnd: false
+                    }
+                case 'setMusicEnd':
+                    return {
+                        ...state,
+                        musicEnd: action.musicEnd
                     }
                 default:
                     return state;
@@ -88,6 +102,9 @@ export const MusicCard = () => {
                             style={{ width: '28px', height: "28px", color: "#333" }}
                             onClick={() => {
                                 //播放
+                                if(state.musicEnd){  
+                                    dispatch({ type: 'setReStart', reStart: !state.reStart })
+                                }
                                 const audio = audioDom.current;
                                 audio.paused && audio.play();
                                 dispatch({ type: 'setIsBroadcast', isBroadcast: !state.isBroadcast })
@@ -117,9 +134,16 @@ export const MusicCard = () => {
                     </div>
                     <div className='music-detail-bottom'>
                         <Progress
-                            totalTime={267}
+                            totalTime={state.nowTimeLength}
                             onPause={state.onPause}
                             className="music-detail-progress"
+                            reStart={state.reStart}
+                            callback={() => {
+                                const audio = audioDom.current;
+                                audio.pause();
+                                dispatch({ type: 'setIsBroadcast', isBroadcast: !state.isBroadcast })
+                                dispatch({ type: 'setMusicEnd', musicEnd: true })
+                            }}
                         />
                         <div className='music-detail-controls'>
                             <PreviousMusicIcon
@@ -131,6 +155,9 @@ export const MusicCard = () => {
                                         style={{ width: '28px', height: "28px", color: "#333" }}
                                         onClick={() => {
                                             //播放
+                                            if(state.musicEnd){
+                                                dispatch({ type: 'setReStart', reStart: !state.reStart })
+                                            }
                                             const audio = audioDom.current;
                                             audio.paused && audio.play && audio.play();
                                             dispatch({ type: 'setIsBroadcast', isBroadcast: !state.isBroadcast })

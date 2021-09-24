@@ -80,7 +80,7 @@ export const Progress = (props: ProgressProps) => {
             })
         }
     }, state.intervalTime)
-    
+
     useEffect(() => {
         dispatch({ type: "setReStart" })
     }, [reStart])
@@ -98,7 +98,7 @@ export const Progress = (props: ProgressProps) => {
         </div>
 
         <div className='ethan-progress-time-length'>
-            {getTimeLength(state.endTime)} / {getTimeLength(totalTime)}
+            {getTimeLength(totalTime-state.endTime)} / {getTimeLength(totalTime)}
         </div>
     </div>
 }

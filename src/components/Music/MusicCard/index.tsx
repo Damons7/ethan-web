@@ -13,7 +13,7 @@ export const MusicCard = () => {
         isBroadcast: true,
         onPause: true,
         audioDom: "",
-        nowTimeLength: 267000,
+        nowTimeLength: 269000,
         reStart:false,
         musicEnd: false
     }
@@ -83,7 +83,6 @@ export const MusicCard = () => {
             <div className='music-top'>
                 <audio
                     ref={audioDom}
-                    autoPlay
                     src='https://music.163.com/song/media/outer/url?id=33894312.mp3'
                 />
                 <CrumbIcon

@@ -105,6 +105,13 @@ export const MusicCard = () => {
                         reStart: !state.reStart,
                         musicEnd: false
                     }
+                    case 'setNowMusicIndex2':
+                        return {
+                            ...state,
+                            nowMusicIndex: action.nowMusicIndex,
+                            reStart: !state.reStart,
+                            musicEnd: false
+                        }
                 default:
                     return state;
             }

@@ -1,4 +1,4 @@
-import { CrumbIcon, BroadcastIcon, PausecastIcon, NextMusicIcon, PreviousMusicIcon } from '@components/Icon'
+import { CrumbIcon, BroadcastIcon, PausecastIcon, NextMusicIcon, PreviousMusicIcon, DownIcon, UpIcon } from '@components/Icon'
 import musicImg from '@images/music.gif'
 import { Progress } from '@/common'
 import { useReducer, useRef, useEffect } from 'react'
@@ -12,7 +12,7 @@ export const MusicCard = () => {
         detailVisible: false,
         isBroadcast: true,
         onPause: true,
-        audioDom: ""
+        audioDom: "",
     }
     useEffect(() => {
         // audioDom.current.paused && audioDom.current.play()
@@ -42,12 +42,11 @@ export const MusicCard = () => {
                         ...state,
                         audioDom: action.audioDom
                     }
-                case 'setonPause':
+                case 'setOnPause':
                     return {
                         ...state,
                         onPause: action.onPause
                     }
-
                 default:
                     return state;
             }
@@ -71,14 +70,14 @@ export const MusicCard = () => {
                 <audio
                     ref={audioDom}
                     autoPlay
-                    src='https://music.163.com/song/media/outer/url?id=406730444.mp3'
+                    src='https://music.163.com/song/media/outer/url?id=33894312.mp3'
                 />
                 <CrumbIcon
                     style={{ width: '20px', height: "20px", color: "#333" }}
                     onClick={() => dispatch({ type: "setDetailVisible", detailVisible: !state.detailVisible })}
                 />
                 <div className='music-top-name'>
-                    <span>海阔天空1111111111111111111</span>
+                    <span>情非得已 --- 群星</span>
                 </div>
                 <PreviousMusicIcon
                     style={{ width: '18px', height: "18px", color: "#333" }}
@@ -106,40 +105,49 @@ export const MusicCard = () => {
                 }
                 <NextMusicIcon style={{ width: '18px', height: "18px", color: "#333" }} />
             </div>
-            <div className={detailClasses}>
-                <div></div>
-                <div className='music-detail-bottom'>
-                    <Progress
-                        totalTime={30}
-                        onPause={state.onPause}
-                        className="music-detail-progress"
-                    />
-                    <div className='music-detail-controls'>
-                        <PreviousMusicIcon
-                            style={{ width: '18px', height: "18px", color: "#333" }}
+            <div className='music-detail-3d'>
+                <div className={detailClasses}>
+                    <div className='music-detail-context'>
+                        <DownIcon
+                            className='music-detail-context-down'
                         />
-                        {
-                            state.isBroadcast ?
-                                <BroadcastIcon
-                                    style={{ width: '28px', height: "28px", color: "#333" }}
-                                    onClick={() => {
-                                        //播放
-                                        const audio = audioDom.current;
-                                        audio.paused && audio.play && audio.play();
-                                        dispatch({ type: 'setIsBroadcast', isBroadcast: !state.isBroadcast })
-                                    }}
-                                />
-                                :
-                                <PausecastIcon style={{ width: '28px', height: "28px", color: "#333" }}
-                                    onClick={() => {
-                                        //暂停
-                                        const audio = audioDom.current;
-                                        audio.pause();
-                                        dispatch({ type: 'setIsBroadcast', isBroadcast: !state.isBroadcast })
-                                    }}
-                                />
-                        }
-                        <NextMusicIcon style={{ width: '18px', height: "18px", color: "#333" }} />
+                        <div className='music-detail-context-img'>
+                            <img src='https://p1.music.126.net/cpoUinrExafBHL5Nv5iDHQ==/109951166361218466.jpg' alt='' />
+                        </div>
+                    </div>
+                    <div className='music-detail-bottom'>
+                        <Progress
+                            totalTime={267}
+                            onPause={state.onPause}
+                            className="music-detail-progress"
+                        />
+                        <div className='music-detail-controls'>
+                            <PreviousMusicIcon
+                                style={{ width: '18px', height: "18px", color: "#333" }}
+                            />
+                            {
+                                state.isBroadcast ?
+                                    <BroadcastIcon
+                                        style={{ width: '28px', height: "28px", color: "#333" }}
+                                        onClick={() => {
+                                            //播放
+                                            const audio = audioDom.current;
+                                            audio.paused && audio.play && audio.play();
+                                            dispatch({ type: 'setIsBroadcast', isBroadcast: !state.isBroadcast })
+                                        }}
+                                    />
+                                    :
+                                    <PausecastIcon style={{ width: '28px', height: "28px", color: "#333" }}
+                                        onClick={() => {
+                                            //暂停
+                                            const audio = audioDom.current;
+                                            audio.pause();
+                                            dispatch({ type: 'setIsBroadcast', isBroadcast: !state.isBroadcast })
+                                        }}
+                                    />
+                            }
+                            <NextMusicIcon style={{ width: '18px', height: "18px", color: "#333" }} />
+                        </div>
                     </div>
                 </div>
             </div>

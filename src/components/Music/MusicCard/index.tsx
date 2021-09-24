@@ -124,9 +124,9 @@ export const MusicCard = () => {
 
     //播放歌曲
     const onBroadcast = () => {
-        if (state.musicEnd) {
-            dispatch({ type: 'setReStart', reStart: !state.reStart })
-        }
+        // if (state.musicEnd) {
+        //     dispatch({ type: 'setReStart', reStart: !state.reStart })
+        // }
         const audio = audioDom.current;
         audio.paused && audio.play();
         dispatch({ type: 'setIsBroadcast', isBroadcast: !state.isBroadcast })
@@ -158,6 +158,7 @@ export const MusicCard = () => {
                         ? nowMusicIndex - 1 : musicDataLength - 1
                 })
             }
+            onBroadcast()
         }
     return <div className='ethan-music-card'>
         <img src={musicImg} alt="" onClick={() => { }} />
@@ -211,7 +212,7 @@ export const MusicCard = () => {
                             className="music-detail-progress"
                             reStart={state.reStart}
                             callback={() => {
-                                dispatch({ type: 'setMusicEnd', musicEnd: true })
+                                // dispatch({ type: 'setMusicEnd', musicEnd: true })
                                 changeMusic(1)
                             }}
                         />

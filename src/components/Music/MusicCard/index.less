@@ -81,7 +81,9 @@
                         transform: translate(0, 0)
                     }
                 }
-
+                &:nth-child(4){
+                    justify-self: center;
+                }
                 &:last-child {
                     justify-self: end;
                 }
@@ -113,12 +115,13 @@
             transform: rotateY(360deg);
         }
 
+        /*当前音乐 css*/
         .music-detail-context {
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-
+            
             .music-detail-context-down {
                 position: absolute;
                 top: 12px;
@@ -157,7 +160,9 @@
 
 
         }
+        /*当前音乐 css END*/
 
+        /* 音乐列表 css*/
         .music-detail-list {
             position: relative;
             
@@ -208,6 +213,7 @@
                 }
             }
         }
+        /* 音乐列表 css END*/
 
         .music-detail-bottom {
             display: grid;

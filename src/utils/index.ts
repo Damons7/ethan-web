@@ -119,12 +119,12 @@ export const getParameter
         return parameter;
     }
 
-// 
+// 获取歌曲时间长度（指定规则）
 export const getTimeLength
     : (data: number) => string
     = data => {
-        const _data = Math.floor(data/1000);
-        if(_data<1){
+        const _data = Math.floor(data / 1000);
+        if (_data < 1) {
             return '0:00'
         }
         if (_data < 60) {
@@ -132,6 +132,13 @@ export const getTimeLength
         } else {
             const m = Math.floor(_data / 60);
             const s = _data - m * 60
-            return m + `:${s<10?'0'+s:s}`;
+            return m + `:${s < 10 ? '0' + s : s}`;
         }
     }
+
+//判断是否为移动端
+export function isMobile() {
+    return !!navigator.userAgent.match(
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone/i
+    );
+}

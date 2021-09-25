@@ -5,6 +5,7 @@ import { useReducer, useRef, useEffect } from 'react'
 import { classNames } from '@/common/utils'
 import './index.less'
 
+//音乐数据
 const musicData = [
     {
         id: 1294467974,
@@ -23,6 +24,14 @@ const musicData = [
         timeLength: 239000
     },
     {
+        id: 1409344469,
+        name: '骂醒我 (翻自 周汤豪) ',
+        singer: '崔天琪',
+        src: "https://music.163.com/song/media/outer/url?id=1409344469.mp3",
+        img: "https://p1.music.126.net/KZtTEGYxqE82UgtNBtPvlw==/109951164546514166.jpg",
+        timeLength: 256966
+    },
+    {
         id: 1819036135,
         name: 'Calling My Phone',
         singer: 'Lil Tjay / 6LACK',
@@ -31,34 +40,27 @@ const musicData = [
         timeLength: 206000
     },
     {
-        id: 33894312,
-        name: '情非得已',
-        singer: '群星',
-        src: "https://music.163.com/song/media/outer/url?id=33894312.mp3",
-        img: "https://p1.music.126.net/cpoUinrExafBHL5Nv5iDHQ==/109951166361218466.jpg",
-        timeLength: 268000
-    },
-    {
-        id: 279103,
-        name: '杀死我的温柔',
-        singer: '麦家瑜',
-        src: "https://music.163.com/song/media/outer/url?id=279103.mp3",
-        img: "https://p2.music.126.net/rw8qSpWiJpkHLmYrFLpRwQ==/109951165083296999.jpg",
-        timeLength: 275000
+        id: 135026,
+        name: 'MC来了',
+        singer: 'MC Hotdog',
+        src: "https://music.163.com/song/media/outer/url?id=135026.mp3",
+        img: "https://p2.music.126.net/Js-ZQub2-4_RA176YXwm5g==/119846767440816.jpg",
+        timeLength: 222000
     }
 ]
-const musicDataLength = musicData.length;
+const musicDataLength = musicData.length; //音乐个数
+
 export const MusicCard = () => {
-    const audioDom: any = useRef()
+    const audioDom: any = useRef();
     const initState = {
         tipsVisible: false,
         detailVisible: false,
-        isBroadcast: true,
-        onPause: true,
+        isBroadcast: true, //是否播放
+        onPause: true, //暂停操作
         audioDom: "",
-        reStart: false,
-        nowMusicIndex: 0,
-        isShowList: false
+        reStart: false, //重新播放
+        nowMusicIndex: 0, //当前音乐indx
+        isShowList: false //是否展示音乐list
     }
     useEffect(() => {
         // audioDom.current.paused && audioDom.current.play()
@@ -144,39 +146,45 @@ export const MusicCard = () => {
 
     //切换音乐
     const changeMusic:
-        (index: number) => void
-        = index => {
-            const { nowMusicIndex } = state
-            //下一首
-            if (index) {
-                dispatch({
-                    type: "setNowMusicIndex",
-                    nowMusicIndex: nowMusicIndex + 1 < musicDataLength
-                        ? nowMusicIndex + 1 : 0
-                })
-            } else { //上一首
-                dispatch({
-                    type: "setNowMusicIndex",
-                    nowMusicIndex: nowMusicIndex - 1 >= 0
-                        ? nowMusicIndex - 1 : musicDataLength - 1
-                })
+        (type: string, index?: number) => void
+        = (type, index = 0) => {
+            const { nowMusicIndex } = state;
+            let _index = nowMusicIndex;
+            switch (type) {
+                //下一首
+                case 'next':
+                    _index = nowMusicIndex + 1 < musicDataLength ? nowMusicIndex + 1 : 0;
+                    break;
+                //上一首
+                case 'prev':
+                    _index = nowMusicIndex - 1 >= 0 ? nowMusicIndex - 1 : musicDataLength - 1;
+                    break;
+                //自定义
+                case 'select':
+                    _index = index
+                    break;
+                default:
+                    break;
             }
-
+            dispatch({
+                type: "setNowMusicIndex",
+                nowMusicIndex: _index
+            })
             setTimeout(() => {
                 onBroadcast()
                 dispatch({ type: "setReStart", reStart: !state.reStart })
-            }, 500);
+            }, 300);
 
         }
 
     return <div className='ethan-music-card'>
-        <img src={musicImg} alt="" onClick={() => { }} />
+        <img src={musicImg} alt="" />
         <div className={classes}>
+            <audio
+                ref={audioDom}
+                src={musicData[state.nowMusicIndex].src}
+            />
             <div className='music-top'>
-                <audio
-                    ref={audioDom}
-                    src={musicData[state.nowMusicIndex].src}
-                />
                 <CrumbIcon
                     style={{ width: '20px', height: "20px", color: "#333" }}
                     onClick={() => dispatch({ type: "setDetailVisible", detailVisible: !state.detailVisible })}
@@ -186,7 +194,7 @@ export const MusicCard = () => {
                 </div>
                 <PreviousMusicIcon
                     style={{ width: '18px', height: "18px", color: "#333" }}
-                    onClick={() => changeMusic(0)}
+                    onClick={() => changeMusic('prev')}
                 />
                 {
                     state.isBroadcast ?
@@ -201,7 +209,7 @@ export const MusicCard = () => {
                 }
                 <NextMusicIcon
                     style={{ width: '18px', height: "18px", color: "#333" }}
-                    onClick={() => changeMusic(1)}
+                    onClick={() => { changeMusic('next') }}
                 />
             </div>
             <div className='music-detail-3d'>
@@ -211,10 +219,10 @@ export const MusicCard = () => {
                             <div className='music-detail-list'>
                                 <UpIcon
                                     className='music-detail-list-up'
-                                    // onClick={() => { dispatch({ type: "setIsShowList", isShowList: false }) }}
+                                    onClick={() => { dispatch({ type: "setIsShowList", isShowList: false }) }}
                                 />
                                 {
-                                    musicData.map(item => {
+                                    musicData.map((item, index) => {
                                         return (
                                             <div className='music-detail-list-item'>
                                                 <div>
@@ -225,16 +233,17 @@ export const MusicCard = () => {
                                                     </div>
                                                 </div>
                                                 {
-                                                    state.isBroadcast ?
-                                                        <BroadcastIcon
-                                                            style={{ width: '36px', height: "36px", color: "#333" }}
-                                                            onClick={onBroadcast}
-                                                        />
-                                                        :
+                                                    index === state.nowMusicIndex && !state.isBroadcast ?
                                                         <PausecastIcon
                                                             style={{ width: '36px', height: "36px", color: "#333" }}
                                                             onClick={onPausecast}
                                                         />
+                                                        :
+                                                        <BroadcastIcon
+                                                            style={{ width: '36px', height: "36px", color: "#333" }}
+                                                            onClick={() => { changeMusic('select', index) }}
+                                                        />
+
                                                 }
                                             </div>
                                         )
@@ -246,7 +255,7 @@ export const MusicCard = () => {
                             <div className='music-detail-context'>
                                 <DownIcon
                                     className='music-detail-context-down'
-                                    // onClick={() => { dispatch({ type: "setIsShowList", isShowList: true }) }}
+                                    onClick={() => { dispatch({ type: "setIsShowList", isShowList: true }) }}
                                 />
                                 <div className='music-detail-context-img'>
                                     <img src={musicData[state.nowMusicIndex].img} alt='' />
@@ -259,14 +268,12 @@ export const MusicCard = () => {
                             onPause={state.onPause}
                             className="music-detail-progress"
                             reStart={state.reStart}
-                            callback={() => {
-                                changeMusic(1)
-                            }}
+                            callback={() => { changeMusic('next') }}
                         />
                         <div className='music-detail-controls'>
                             <PreviousMusicIcon
                                 style={{ width: '28px', height: "28px", color: "#333" }}
-                                onClick={() => changeMusic(0)}
+                                onClick={() => changeMusic('prev')}
                             />
                             {
                                 state.isBroadcast ?
@@ -282,7 +289,7 @@ export const MusicCard = () => {
                             }
                             <NextMusicIcon
                                 style={{ width: '28px', height: "28px", color: "#333" }}
-                                onClick={() => changeMusic(1)}
+                                onClick={() => changeMusic('next')}
                             />
                         </div>
                     </div>

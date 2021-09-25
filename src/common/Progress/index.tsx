@@ -11,7 +11,9 @@ interface BaseProgressProps {
     onPause?: boolean; //中断/继续 进度条
     reStart?: boolean,  //重新开始
     children?: React.ReactNode;
-    callback?: () => any// 回调函数
+    lyricTimeArr: Array<number>,
+    callback?: () => any// 回调函数;
+    callbackSecond?: (endTime: string | number) => any// 每秒回调函数;
 }
 
 //Partial 设置为可选属性
@@ -23,6 +25,8 @@ export const Progress = (props: ProgressProps) => {
         interval = 1000,
         totalTime = 0,
         callback,
+        callbackSecond,
+        lyricTimeArr,
         onPause = false,
         reStart = false,
         ...restProps
@@ -73,6 +77,11 @@ export const Progress = (props: ProgressProps) => {
             callback && callback()
         }
         else {
+            const index = lyricTimeArr.findIndex((item: number, index, arr) => {
+                return index ? item - (item - arr[index - 1]) / 2 - (totalTime - state.endTime) >= 0 :
+                    item - (totalTime - state.endTime) >= 0
+            })
+            callbackSecond && callbackSecond(index === 0 ? index : index - 1)
             dispatch({
                 type: "setProgress",
                 endTime: state.endTime - 1000,
@@ -81,10 +90,10 @@ export const Progress = (props: ProgressProps) => {
         }
     }, state.intervalTime)
 
-    useEffect(() => {     
+    useEffect(() => {
         dispatch({ type: "setReStart" })
     }, [reStart])
-    
+
     useEffect(() => {
         onPause ?
             dispatch({ type: "setIntervalTime", intervalTime: null })
@@ -98,7 +107,7 @@ export const Progress = (props: ProgressProps) => {
         </div>
 
         <div className='ethan-progress-time-length'>
-            {getTimeLength(totalTime-state.endTime)} / {getTimeLength(totalTime)}
+            {getTimeLength(totalTime - state.endTime)} / {getTimeLength(totalTime)}
         </div>
     </div>
 }

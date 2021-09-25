@@ -1,53 +1,12 @@
 import { CrumbIcon, BroadcastIcon, PausecastIcon, NextMusicIcon, PreviousMusicIcon, DownIcon, UpIcon } from '@components/Icon'
 import musicImg from '@images/music.gif'
 import { Progress } from '@/common'
+import { musicData } from './config'
 import { useReducer, useRef, useEffect } from 'react'
 import { classNames } from '@/common/utils'
 import './index.less'
 
-//音乐数据
-const musicData = [
-    {
-        id: 1294467974,
-        name: '长沙HOOD',
-        singer: 'KEY.L刘聪 / $CC731',
-        src: "https://music.163.com/song/media/outer/url?id=1294467974.mp3",
-        img: "https://p1.music.126.net/tjs6JyPbZFFSvlkLbSqJzw==/109951163412049985.jpg",
-        timeLength: 244000
-    },
-    {
-        id: 2788529,
-        name: 'Loving Strangers',
-        singer: 'Jocelyn Pook',
-        src: "https://music.163.com/song/media/outer/url?id=2788529.mp3",
-        img: "https://p2.music.126.net/4YLeBH86MTluZLqojCz9nQ==/109951164616015223.jpg",
-        timeLength: 239000
-    },
-    {
-        id: 1409344469,
-        name: '骂醒我 (翻自 周汤豪) ',
-        singer: '崔天琪',
-        src: "https://music.163.com/song/media/outer/url?id=1409344469.mp3",
-        img: "https://p1.music.126.net/KZtTEGYxqE82UgtNBtPvlw==/109951164546514166.jpg",
-        timeLength: 256966
-    },
-    {
-        id: 1819036135,
-        name: 'Calling My Phone',
-        singer: 'Lil Tjay / 6LACK',
-        src: "https://music.163.com/song/media/outer/url?id=1819036135.mp3",
-        img: "https://p2.music.126.net/A2Myqv8MG489RDVcHXPyWw==/109951165711757957.jpg",
-        timeLength: 206000
-    },
-    {
-        id: 135026,
-        name: 'MC来了',
-        singer: 'MC Hotdog',
-        src: "https://music.163.com/song/media/outer/url?id=135026.mp3",
-        img: "https://p2.music.126.net/Js-ZQub2-4_RA176YXwm5g==/119846767440816.jpg",
-        timeLength: 222000
-    }
-]
+
 const musicDataLength = musicData.length; //音乐个数
 
 export const MusicCard = () => {
@@ -60,7 +19,9 @@ export const MusicCard = () => {
         audioDom: "",
         reStart: false, //重新播放
         nowMusicIndex: 0, //当前音乐indx
-        isShowList: false //是否展示音乐list
+        isShowList: false, //是否展示音乐list
+        isShowLyric: false,//是否展示歌词
+        nowMusicTime: 0//此刻歌曲进行时间
     }
     useEffect(() => {
         // audioDom.current.paused && audioDom.current.play()
@@ -112,6 +73,18 @@ export const MusicCard = () => {
                     return {
                         ...state,
                         isShowList: action.isShowList,
+                    }
+                //设置是否展示音乐歌词
+                case 'setIsShowLyric':
+                    return {
+                        ...state,
+                        isShowLyric: action.isShowLyric,
+                    }
+                //设置是否展示音乐歌词
+                case 'setNowMusicTime':
+                    return {
+                        ...state,
+                        nowMusicTime: action.nowMusicTime
                     }
                 default:
                     return state;
@@ -243,7 +216,6 @@ export const MusicCard = () => {
                                                             style={{ width: '36px', height: "36px", color: "#333" }}
                                                             onClick={() => { changeMusic('select', index) }}
                                                         />
-
                                                 }
                                             </div>
                                         )
@@ -257,9 +229,26 @@ export const MusicCard = () => {
                                     className='music-detail-context-down'
                                     onClick={() => { dispatch({ type: "setIsShowList", isShowList: true }) }}
                                 />
-                                <div className='music-detail-context-img'>
-                                    <img src={musicData[state.nowMusicIndex].img} alt='' />
-                                </div>
+                                {
+                                    state.isShowLyric ?
+                                        <div className='music-detail-context-lyric' onClick={() => dispatch({ type: "setIsShowLyric", isShowLyric: false })}>
+                                            {
+                                                musicData[state.nowMusicIndex].lyric.split('\n').map((item, index) => {
+                                                    return <div key={item+index} className={
+                                                        state.nowMusicTime === index ?
+                                                            `music-lyric-active`
+                                                            : ((state.nowMusicTime - index) > 3 ?
+                                                                'music-lyric-hidden' : "")}>
+                                                        {item.replace(/\[.*\]/g, '')}
+                                                    </div>
+                                                })
+                                            }
+                                        </div>
+                                        :
+                                        <div className='music-detail-context-img' onClick={() => dispatch({ type: "setIsShowLyric", isShowLyric: true })}>
+                                            <img src={musicData[state.nowMusicIndex].img} alt='' />
+                                        </div>
+                                }
                             </div>
                     }
                     <div className='music-detail-bottom'>
@@ -269,6 +258,19 @@ export const MusicCard = () => {
                             className="music-detail-progress"
                             reStart={state.reStart}
                             callback={() => { changeMusic('next') }}
+                            lyricTimeArr={musicData[state.nowMusicIndex].lyric.split('\n').map((item) => {
+                                const lyricTime = item.match(/\[(.*?)\]/);
+                                const tArr = lyricTime && lyricTime[1].split(':');
+                                const allTime = tArr ? (
+                                    tArr.length === 2 ?
+                                        Number(tArr[0]) * 60000 + Number(tArr[1]) * 1000
+                                        :
+                                        Number(tArr[1]) * 60000 * 60 + Number(tArr[1]) * 60000 + Number(tArr[2]) * 1000
+                                ) : 86400000
+                                return allTime
+                            })
+                            }
+                            callbackSecond={time => time !== state.nowMusicTime && dispatch({ type: "setNowMusicTime", nowMusicTime: time })}
                         />
                         <div className='music-detail-controls'>
                             <PreviousMusicIcon

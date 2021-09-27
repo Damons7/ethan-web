@@ -7,7 +7,7 @@ import { Progress, Message } from '@/common'
 import { musicData } from './config'
 import { useReducer, useRef, useMemo } from 'react'
 import { classNames } from '@/common/utils'
-import { randomNum } from '@/utils'
+import { randomNum, isMobile } from '@/utils'
 import './index.less'
 
 const musicDataLength = musicData.length; //音乐个数
@@ -232,9 +232,14 @@ export const MusicCard = () => {
         };
     }
 
-    return <div className='ethan-music-card-fixed' ref={musicDom}>
+    return <div className='ethan-music-card-fixed' ref={musicDom} style={   isMobile() ?{left:'90vw'}:{}}>
         <div className='ethan-music-card'>
-            <img src={musicImg} alt="" onMouseDown={handleMouseDown} />
+            {
+                isMobile() ?
+                    <img src={musicImg} alt="" />
+                    : <img src={musicImg} alt="" onMouseDown={handleMouseDown} />
+            }
+
             <div className={classes}>
                 <audio
                     ref={audioDom}

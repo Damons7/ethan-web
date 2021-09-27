@@ -1,8 +1,5 @@
 .ethan-music-card {
     position: relative;
-    padding-bottom: 8px;
-    padding-right: 6px;
-    z-index: 1081;
 
     &:hover {
         .music-card {
@@ -21,7 +18,7 @@
     .music-card {
         position: absolute;
         right: 44px;
-        top: 12px;
+        top: 10px;
         display: grid;
         opacity: 0;
         transition: all 3s ease-out;
@@ -29,7 +26,6 @@
         .music-top {
             padding: 0 10px;
             border-radius: 6px;
-            // background-color: lightgray;
             background: linear-gradient(to bottom, #fff 0%, #ace1ea 100%);
             border: 1px solid lightgrey;
             width: 290px;
@@ -294,4 +290,10 @@
             transform: rotateY(30deg);
         }
     }
+}
+.ethan-music-card-fixed{
+    position: fixed;
+    top:0px;
+    left: calc(100vw - 230px );
+    z-index: 1081;
 }

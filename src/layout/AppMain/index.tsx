@@ -11,13 +11,13 @@ interface IAppMain {
 
 export default function AppMain(props: IAppMain) {
     const { animate } = props;
-    const [weather, setWeather] = useState(<Cloud/>)
+    const [weather, setWeather] = useState(<Cloud />)
 
     const globalContext = {
         weather: weather, //当前天气
         setWeather: (val: JSX.Element) => {
             setWeather(val)
-        }  
+        }
     }
 
     // router配置
@@ -34,6 +34,7 @@ export default function AppMain(props: IAppMain) {
             </Route>
         )
     });
+
 
     return (
         <GlobalContext.Provider value={globalContext}>

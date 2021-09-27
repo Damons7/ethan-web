@@ -67,6 +67,7 @@ export const Progress = (props: ProgressProps) => {
                         endTime: action.endTime,
                         progressWidth: action.progressWidth
                     }
+              
                 case 'setReStart':
                     return initState
                 default:
@@ -105,7 +106,8 @@ export const Progress = (props: ProgressProps) => {
             dispatch({ type: "setIntervalTime", intervalTime: interval })
     }, [onPause])
 
-    return <div className={classes} {...restProps} ref={progressDom} onMouseDown={(e: any) => {
+    //点击进度条 onMouseDown
+    const handleMouseDown = (e: any) => {
         const width = progressDom.current.clientWidth;
         const offsetX = e.nativeEvent.offsetX;
         dispatch({
@@ -114,12 +116,15 @@ export const Progress = (props: ProgressProps) => {
             progressWidth: `${(offsetX / width) * 100}%`
         })
         callbackCurrentTime && callbackCurrentTime((offsetX / width) * totalTime);
+    }
 
-    }}>
-        <div className={`${classes} ethan-progress-cover`} style={{ width: state.progressWidth }}>
-            {/* <div className='ethan-progress-round'></div> */}
-        </div>
-
+    return <div
+        {...restProps}
+        className={classes}
+        ref={progressDom}
+        onMouseDown={(e) => handleMouseDown(e)}
+    >
+        <div className={`${classes} ethan-progress-cover`} style={{ width: state.progressWidth }} />
         <div className='ethan-progress-time-length'>
             {getTimeLength(totalTime - state.endTime)} / {getTimeLength(totalTime)}
         </div>

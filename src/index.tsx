@@ -3,14 +3,16 @@ import ReactDOM from 'react-dom';
 import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 import { isMobile } from '@/utils'
-import './assets/common.less'
 import Error from '@/pages/Error'
+import { MusicCard } from '@/components/Music/MusicCard'
+import './assets/common.less'
 
 ReactDOM.render(
   <React.StrictMode>
     {
       isMobile() ?
-        <Error err={'该开发师有点菜，移动端没时间兼容，去趟PC端访问吧，你忍一下'} />
+        // <Error err={'该开发师有点菜，移动端没时间兼容，去趟PC端访问吧，你忍一下'} />
+        <MusicCard />
         :
         <App />
     }

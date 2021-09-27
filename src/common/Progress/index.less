@@ -4,16 +4,32 @@
     border-radius: 4px;
     background-color: #f6f6f6;
     .ethan-progress-cover{
-        // width: 60%;
         position: absolute;
-        background-color:lightsalmon;
-        // .ethan-progress-round{
-        //     width: 6px;
-        //     height: 6px;
-        //     border:.5px solid #f6f6f6;
-        //     border-radius: 50%;
-        //     float: right;
-        // }
+        background-color:lightsalmon; 
+    }
+    .ethan-progress-move{
+        position: absolute;
+        background-color: red;
+        .ethan-progress-round{
+            width: 6px;
+            height: 6px;
+            // float: right;
+        }
+        .ethan-progress-tip{
+            bottom: 12px;
+            left: -12px;
+            .ethan-tooltip-title{
+                min-width: 32px;
+                min-height: 10px;
+                padding:6px;
+                font-size: 12px;
+                background-color: #ace1ea;
+                color: #666;
+            }
+            .ethan-tooltip-title-round{
+                display: none ;
+            }
+        }
     }
     .ethan-progress-time-length{
         position: absolute;

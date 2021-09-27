@@ -11,8 +11,8 @@ ReactDOM.render(
   <React.StrictMode>
     {
       isMobile() ?
-        // <Error err={'该开发师有点菜，移动端没时间兼容，去趟PC端访问吧，你忍一下'} />
-        <MusicCard />
+        <Error err={'该开发师有点菜，移动端没时间兼容，去趟PC端访问吧，你忍一下'} />
+        // <MusicCard />
         :
         <App />
     }

@@ -31,6 +31,7 @@ const Item = () => {
     // 初始化state
     const initState = {
         weatherVisible: false,
+        musicVisible:false
     }
     // 功能reducer
     const itemReducer
@@ -45,6 +46,12 @@ const Item = () => {
                         weatherVisible: true
                     }
 
+                // 音乐modal功能   
+                case 'showMusic':
+                    return {
+                        ...state,
+                        musicVisible: true
+                    }
                 // 默认返回initState初始化
                 case 'init':
                     return {
@@ -70,6 +77,7 @@ const Item = () => {
                     <span>天气</span>
                 </div>
             </div>
+            
             <WeatherModal
                 visible={state.weatherVisible}
                 onOk={() => { dispatch({ type: 'init' }) }}

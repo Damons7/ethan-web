@@ -1,16 +1,21 @@
-import { CrumbIcon, BroadcastIcon, PausecastIcon, NextMusicIcon, PreviousMusicIcon, DownIcon, UpIcon } from '@components/Icon'
+import {
+    CrumbIcon, BroadcastIcon, PausecastIcon, NextMusicIcon, PreviousMusicIcon, DownIcon, UpIcon,
+    MusicCycleIcon, MusicOrderIcon, MusicRandomIcon
+} from '@components/Icon'
 import musicImg from '@images/music.gif'
-import { Progress } from '@/common'
+import { Progress, Message } from '@/common'
 import { musicData } from './config'
-import { useReducer, useRef, useEffect } from 'react'
+import { useReducer, useRef, useMemo } from 'react'
 import { classNames } from '@/common/utils'
+import { randomNum } from '@/utils'
 import './index.less'
-
 
 const musicDataLength = musicData.length; //音乐个数
 
 export const MusicCard = () => {
-    const audioDom: any = useRef();
+
+    const audioDom: any = useRef();   //audio dom
+
     const initState = {
         tipsVisible: false,
         detailVisible: false,
@@ -21,15 +26,12 @@ export const MusicCard = () => {
         nowMusicIndex: 0, //当前音乐indx
         isShowList: false, //是否展示音乐list
         isShowLyric: false,//是否展示歌词
-        nowMusicTime: 0//此刻歌曲进行时间
+        nowMusicTime: 0,//此刻歌曲进行时间
+        musicModel: {
+            model: ['顺序播放', '单曲循环', '随机播放'],
+            nowModelIndex: 0
+        }
     }
-    useEffect(() => {
-        // audioDom.current.paused && audioDom.current.play()
-        //     .catch((err: any) => {
-        //         console.log(err, "err");
-        //     });
-
-    }, [])
 
     // reducer函数
     const musicCardReducer
@@ -86,6 +88,17 @@ export const MusicCard = () => {
                         ...state,
                         nowMusicTime: action.nowMusicTime
                     }
+
+                //设置音乐播放模式
+                case 'setMusicModel':
+                    return {
+                        ...state,
+                        musicModel: {
+                            ...state.musicModel,
+                            nowModelIndex: action.nowModelIndex
+                        }
+                    }
+
                 default:
                     return state;
             }
@@ -114,9 +127,18 @@ export const MusicCard = () => {
     const onPausecast = () => {
         const audio = audioDom.current;
         audio.pause();
+        console.log(audio.currentTime, 'time');
+
         dispatch({ type: 'setIsBroadcast', isBroadcast: true })
     }
 
+    //快进/倒退 歌曲
+    const onFast = (endTime: number) => {
+        const audio = audioDom.current;
+        console.log( audio.currentTime,'和',endTime /1000);
+        
+        audio.currentTime = endTime /1000
+    }
     //切换音乐
     const changeMusic:
         (type: string, index?: number) => void
@@ -139,16 +161,47 @@ export const MusicCard = () => {
                 default:
                     break;
             }
-            dispatch({
-                type: "setNowMusicIndex",
-                nowMusicIndex: _index
-            })
+            dispatch({ type: "setNowMusicIndex", nowMusicIndex: _index })
             setTimeout(() => {
                 onBroadcast()
                 dispatch({ type: "setReStart", reStart: !state.reStart })
             }, 300);
 
         }
+
+    //切换音乐模式
+    const changeMusicModel:
+        () => void
+        = () => {
+            const { nowModelIndex, model } = state.musicModel;
+            const index = nowModelIndex + 1 < model.length ? nowModelIndex + 1 : 0
+            dispatch({
+                "type": "setMusicModel",
+                nowModelIndex: index
+            })
+            Message.success({ msg: `已切换${model[index]}`, bottomMsg: "尽情聆听" })
+        }
+
+    //歌曲结束后回调
+    const callbackEndMusic = () => {
+        switch (state.musicModel.nowModelIndex) {
+            //顺序播放
+            case 0:
+                changeMusic('next')
+                break;
+            //单曲循环
+            case 1:
+                changeMusic('select', state.nowMusicIndex)
+                break;
+            //随机播放    
+            case 2:
+                changeMusic('select', randomNum(0, musicDataLength - 1))
+                break;
+            default:
+                changeMusic('next');
+                break;
+        }
+    }
 
     return <div className='ethan-music-card'>
         <img src={musicImg} alt="" />
@@ -197,7 +250,7 @@ export const MusicCard = () => {
                                 {
                                     musicData.map((item, index) => {
                                         return (
-                                            <div className='music-detail-list-item'>
+                                            <div className='music-detail-list-item' key={item.id}>
                                                 <div>
                                                     <img src={item.img} alt="" />
                                                     <div className='music-detail-list-item-info'>
@@ -221,7 +274,6 @@ export const MusicCard = () => {
                                         )
                                     })
                                 }
-
                             </div>
                             :
                             <div className='music-detail-context'>
@@ -234,7 +286,7 @@ export const MusicCard = () => {
                                         <div className='music-detail-context-lyric' onClick={() => dispatch({ type: "setIsShowLyric", isShowLyric: false })}>
                                             {
                                                 musicData[state.nowMusicIndex].lyric.split('\n').map((item, index) => {
-                                                    return <div key={item+index} className={
+                                                    return <div key={item + index} className={
                                                         state.nowMusicTime === index ?
                                                             `music-lyric-active`
                                                             : ((state.nowMusicTime - index) > 3 ?
@@ -257,22 +309,47 @@ export const MusicCard = () => {
                             onPause={state.onPause}
                             className="music-detail-progress"
                             reStart={state.reStart}
-                            callback={() => { changeMusic('next') }}
-                            lyricTimeArr={musicData[state.nowMusicIndex].lyric.split('\n').map((item) => {
-                                const lyricTime = item.match(/\[(.*?)\]/);
-                                const tArr = lyricTime && lyricTime[1].split(':');
-                                const allTime = tArr ? (
-                                    tArr.length === 2 ?
-                                        Number(tArr[0]) * 60000 + Number(tArr[1]) * 1000
-                                        :
-                                        Number(tArr[1]) * 60000 * 60 + Number(tArr[1]) * 60000 + Number(tArr[2]) * 1000
-                                ) : 86400000
-                                return allTime
-                            })
+                            callback={callbackEndMusic}
+                            callbackCurrentTime={endTime => {
+                                onFast(endTime)
+                            }}
+                            lyricTimeArr={
+                                useMemo(() => musicData[state.nowMusicIndex].lyric.split('\n').map(item => {
+                                    const lyricTime = item.match(/\[(.*?)\]/);
+                                    const tArr = lyricTime && lyricTime[1].split(':');
+                                    const allTime = tArr ? (
+                                        tArr.length === 2 ?
+                                            Number(tArr[0]) * 60000 + Number(tArr[1]) * 1000
+                                            :
+                                            Number(tArr[1]) * 60000 * 60 + Number(tArr[1]) * 60000 + Number(tArr[2]) * 1000
+                                    ) : 86400000;
+                                    return allTime;
+                                }), [state.nowMusicIndex])
                             }
                             callbackSecond={time => time !== state.nowMusicTime && dispatch({ type: "setNowMusicTime", nowMusicTime: time })}
                         />
                         <div className='music-detail-controls'>
+                            {
+                                state.musicModel.nowModelIndex === 0 ?
+                                    <MusicOrderIcon
+                                        className='music-detail-controls-model'
+                                        onClick={changeMusicModel}
+                                    />
+                                    : (
+                                        state.musicModel.nowModelIndex === 1 ?
+                                            <MusicCycleIcon
+                                                className='music-detail-controls-model'
+                                                onClick={changeMusicModel}
+                                            />
+                                            :
+                                            <MusicRandomIcon
+                                                className='music-detail-controls-model'
+                                                onClick={changeMusicModel}
+                                            />
+                                    )
+                            }
+
+
                             <PreviousMusicIcon
                                 style={{ width: '28px', height: "28px", color: "#333" }}
                                 onClick={() => changeMusic('prev')}

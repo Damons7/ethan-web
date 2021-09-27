@@ -1,6 +1,6 @@
 import { classNames } from '../utils'
 import { getTimeLength } from '@/utils'
-import { useEffect, HTMLAttributes, useReducer } from "react";
+import { useEffect, HTMLAttributes, useReducer, useRef } from "react";
 import { useInterval } from "@/hook/useInterval";
 import './index.less'
 
@@ -13,7 +13,8 @@ interface BaseProgressProps {
     children?: React.ReactNode;
     lyricTimeArr: Array<number>,
     callback?: () => any// 回调函数;
-    callbackSecond?: (endTime: string | number) => any// 每秒回调函数;
+    callbackSecond?: (endTime: string | number) => void// 每秒回调函数;
+    callbackCurrentTime?: (endTime: number) => void// 快进/倒退 回调函数;
 }
 
 //Partial 设置为可选属性
@@ -26,11 +27,14 @@ export const Progress = (props: ProgressProps) => {
         totalTime = 0,
         callback,
         callbackSecond,
+        callbackCurrentTime,
         lyricTimeArr,
         onPause = false,
         reStart = false,
         ...restProps
     } = props;
+
+    const progressDom: any = useRef();   //audio dom
 
     // 设置class
     const classes = classNames("ethan-progress", className, {
@@ -101,7 +105,17 @@ export const Progress = (props: ProgressProps) => {
             dispatch({ type: "setIntervalTime", intervalTime: interval })
     }, [onPause])
 
-    return <div className={classes} {...restProps}>
+    return <div className={classes} {...restProps} ref={progressDom} onMouseDown={(e: any) => {
+        const width = progressDom.current.clientWidth;
+        const offsetX = e.nativeEvent.offsetX;
+        dispatch({
+            type: "setProgress",
+            endTime: (1 - offsetX / width) * totalTime,
+            progressWidth: `${(offsetX / width) * 100}%`
+        })
+        callbackCurrentTime && callbackCurrentTime((offsetX / width) * totalTime);
+
+    }}>
         <div className={`${classes} ethan-progress-cover`} style={{ width: state.progressWidth }}>
             {/* <div className='ethan-progress-round'></div> */}
         </div>

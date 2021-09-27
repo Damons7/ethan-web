@@ -2,7 +2,7 @@
     position: relative;
     padding-bottom: 8px;
     padding-right: 6px;
-    z-index: 198;
+    z-index: 1081;
 
     &:hover {
         .music-card {
@@ -81,9 +81,11 @@
                         transform: translate(0, 0)
                     }
                 }
-                &:nth-child(4){
+
+                &:nth-child(4) {
                     justify-self: center;
                 }
+
                 &:last-child {
                     justify-self: end;
                 }
@@ -121,7 +123,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            
+
             .music-detail-context-down {
                 position: absolute;
                 top: 12px;
@@ -146,6 +148,7 @@
                     border-radius: 50%;
                 }
             }
+
             /* 音乐 详情图片 css END*/
 
             /* 音乐 歌词 css*/
@@ -153,23 +156,27 @@
                 width: 220px;
                 height: 300px;
 
-                overflow-y: hidden; 
-                >div{
+                overflow-y: hidden;
+
+                >div {
                     font-size: 14px;
                     line-height: 30px;
                     text-align: center;
-                    padding:0 10px;
-                    color:#333;
+                    padding: 0 10px;
+                    color: #333;
                 }
-                .music-lyric-active{
+
+                .music-lyric-active {
                     font-size: 16px;
                     color: salmon;
                     -webkit-text-stroke: 1px lightsalmon;
                 }
-                .music-lyric-hidden{
+
+                .music-lyric-hidden {
                     display: none;
                 }
             }
+
             /* 音乐 歌词 css END*/
 
             // 旋转动画
@@ -186,12 +193,13 @@
 
 
         }
+
         /*当前音乐 css END*/
 
         /* 音乐列表 css*/
         .music-detail-list {
             position: relative;
-            
+
             .music-detail-list-up {
                 position: absolute;
                 bottom: 12px;
@@ -216,9 +224,10 @@
 
                         span {
                             font-size: 14px;
-                            word-wrap:break-word; 
-                            word-break:break-all; 
-                            overflow: hidden;/*这个参数根据需要来绝对要不要*/
+                            word-wrap: break-word;
+                            word-break: break-all;
+                            overflow: hidden;
+                            /*这个参数根据需要来绝对要不要*/
                             max-width: 140px;
                             max-height: 36px;
 
@@ -239,6 +248,7 @@
                 }
             }
         }
+
         /* 音乐列表 css END*/
 
         .music-detail-bottom {
@@ -254,6 +264,16 @@
                 display: grid;
                 grid-auto-flow: column;
                 align-items: center;
+                position: relative;
+
+                .music-detail-controls-model {
+                    position: absolute;
+                    width: 24px;
+                    height: 24px;
+                    color: #333;
+                    top:6px;
+                    left: -46px;
+                }
             }
 
             background: linear-gradient(to bottom, #96cedf 0%, #fff 100%);

@@ -142,3 +142,15 @@ export function isMobile() {
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone/i
     );
 }
+
+//生成随机整数 【n,m】
+export function randomNum(minNum: number, maxNum?: any) {
+    switch (arguments.length) {
+        case 1:
+            return parseInt(Math.random() * minNum + 1 + '')
+        case 2:
+            return parseInt(Math.random() * (maxNum - minNum + 1) + minNum + '');
+        default:
+            return 0;
+    }
+}

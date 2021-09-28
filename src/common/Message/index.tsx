@@ -3,6 +3,7 @@ import wink from '@images/wink.png'
 import success from '@images/success.png'
 import warn from '@images/warn.png'
 import error from '@images/error.png'
+import { DogEmgIcon } from '@components/Icon'
 import { classNames } from "../utils";
 import "./index.less";
 
@@ -13,7 +14,7 @@ type messageConfigType = {
     duration?: number,
     className?: string
     color?: string,
-    icon?:string
+    icon?: string
 }
 type messageAPIType = {
     [key: string]: (config: messageConfigType) => void
@@ -56,7 +57,7 @@ export const Message: any = (props: messageConfigType) => {
 };
 
 const ShowMessage = (props: any) => {
-    const { type = 'info',icon, msg, bottomMsg, className, color } = props;
+    const { type = 'info', icon, msg, bottomMsg, className, color } = props;
     const classes = classNames("ethan-message-content", className, {
         [`ethan-message-${type}`]: true
     });
@@ -65,7 +66,6 @@ const ShowMessage = (props: any) => {
         : (type: string) => string
         = type => {
             let img = '';
-
             switch (type) {
                 case 'info':
                     img = '';
@@ -89,7 +89,12 @@ const ShowMessage = (props: any) => {
         }
 
     return <div className={classes}>
-        <img src={icon??getImg(type)} alt='加载失败' />
+        {
+            type === 'success' ?
+                <DogEmgIcon style={{ width: '5rem', height: '5rem' }} />
+                :
+                <img src={icon ?? getImg(type)} alt='加载失败' />
+        }
         <p style={{ color }}>{msg}</p>
         <p style={{ color }}>{bottomMsg}</p>
     </div>

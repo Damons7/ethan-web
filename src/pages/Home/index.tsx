@@ -108,11 +108,11 @@ export const Home = () => {
                     </p>
                 </section>
                 <section className='home-func'>
-                    <div onClick={() => { Message.thank({ msg: "THANK U !", bottomMsg: "NO . 116" }) }}>
+                    <div onClick={() => { Message.thank({ msg: "THANK U !", bottomMsg: "NO . 8796" }) }}>
                         <img src={like} alt="" />
                         <span>点赞</span>
                     </div>
-                    <div onClick={() => { Message.info({ msg: "假装没反应！", bottomMsg: "--", icon: angry }) }}>
+                    <div onClick={() => { Message.info({ msg: "别点了没反应！", bottomMsg: "--", icon: angry }) }}>
                         <img src={unlike} alt="" />
                         <span>不行</span>
                     </div>

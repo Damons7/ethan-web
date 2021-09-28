@@ -12,41 +12,42 @@
         display: grid;
         grid-template: 1fr;
         place-content: center;
-        min-width: calc(100vw/10);
-        max-width: calc(100vw/3);
-        min-height: calc(100vh/3);
-        max-height: calc(100vh/2);
-        border-radius: 10px;
-        border: 4px solid white;
-        margin: 15% auto;
+        max-width: calc(36rem);
+        border-radius: 2rem;
+        border: .4rem solid white;
+        margin: 18% auto;
         background-color: #FF6D8E;
-        grid-row-gap: 20px;
-
+        grid-row-gap: 2rem;
+        padding: 4rem 0;
         img {
             place-self: center;
-            max-width: 40px;
-            max-height: 40px;
+            max-width: 6rem;
+            max-height: 6rem;
         }
-
+        svg {
+            place-self: center;
+            max-width: 4rem;
+            max-height: 4rem;
+        }
         >p {
-            padding: 0 20px;
+            padding: 0 2rem;
             text-align: center;
             place-self: center;
             color: white;
-            font-size: 40px;
+            font-size: 3rem;
             font-weight: 1000;
             word-wrap: break-word;
             word-break: break-all;
 
             &:last-child {
-                font-size: 30px;
+                font-size: 2rem;
             }
         }
     }
 
     .ethan-message-info{
         background-color: white;
-        border: 4px solid black;
+        border: .4rem solid black;
         >p{
            color: black;
        }
@@ -87,14 +88,14 @@
     100% {
         opacity: 0;
         display: none;
-        transform: translateY(-61px);
+        transform: translateY(-6.1rem);
     }
 }
 
 @keyframes fadeIn {
     0% {
         opacity: 0;
-        transform: translateY(-61px);
+        transform: translateY(-6.1rem);
     }
 
     100% {

@@ -4,6 +4,7 @@ import { infoConfig } from '@/pages/About/config'
 import WeatherModal from '@components/Modal/weatherModal'
 import { useState, useContext, useReducer } from 'react'
 import right from '@images/right.png'
+import { MusicIcon } from '@components/Icon'
 import './index.less'
 
 export const Share = () => {
@@ -31,7 +32,7 @@ const Item = () => {
     // 初始化state
     const initState = {
         weatherVisible: false,
-        musicVisible:false
+        musicVisible: false
     }
     // 功能reducer
     const itemReducer
@@ -76,8 +77,15 @@ const Item = () => {
                     </div>
                     <span>天气</span>
                 </div>
+                <div onClick={() => { dispatch({ type: 'showMusic' }) }} className='cursor-p'>
+                    {/* <div className='weather-icon'> */}
+                    {/* {context.weather} */}
+                    <MusicIcon style={{ width: "64px", height: "64px" }} />
+                    {/* </div> */}
+                    <span>音乐盒</span>
+                </div>
             </div>
-            
+
             <WeatherModal
                 visible={state.weatherVisible}
                 onOk={() => { dispatch({ type: 'init' }) }}

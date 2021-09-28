@@ -128,8 +128,6 @@ export const MusicCard = () => {
     const onPausecast = () => {
         const audio = audioDom.current;
         audio.pause();
-        console.log(audio.currentTime, 'time');
-
         dispatch({ type: 'setIsBroadcast', isBroadcast: true })
     }
 

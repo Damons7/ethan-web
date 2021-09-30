@@ -14,9 +14,18 @@ html {
     -webkit-text-size-adjust: 100%;
     /* 2 */
 
-    /* 1rem = 100px */
-    font-size: calc(100vw / 750 * 100);
+}
 
+@media screen and (min-width:801px) {
+    html {
+        font-size: 100px;
+    }
+}
+
+@media screen and (max-width:801px) {
+    html {
+        font-size: calc(100vw / 750 * 10);
+    }
 }
 
 /* Sections

@@ -11,14 +11,23 @@ type musicDataArr = {
 type musicDataType = Array<musicDataArr>
 //音乐数据
 export const musicData: musicDataType = [
+    // {
+    //     id: 29950496,
+    //     name: 'Angels',
+    //     singer: 'Joshua Radin',
+    //     src: "https://music.163.com/song/media/outer/url?id=29950496.mp3",
+    //     img: "https://p2.music.126.net/9FqM6gVM1te8atYZ5RKcpQ==/109951164853335450.jpg",
+    //     timeLength: 188731,
+    //     lyric: "[00:11.33]It's been a long time that I've been on my own, and I can't take no more\n[00:21.13]But these winds are changin'\n[00:23.66]They'll blow me through the storm until I see the shore\n[00:30.50]And I'm prayin' for someone to show me I'm not done\n[00:36.15]Sometimes I see your face\n[00:40.17]You've got everything I need\n[00:45.04]When I'm lost, it's only you I seek\n[00:50.21]You've got wings to set me free\n[00:55.30]When I doubt, you're makin' me believe\n[01:00.27]That angels can fall, angels can fall\n[01:09.97]And I'll cross the ocean\n[01:12.43]I'll walk the desert sand\n[01:14.84]I'll find those hills to climb\n[01:19.88]And I'll keep on searchin' 'cause I know you want to land\n[01:25.03]Into these arms of mine\n[01:29.25]On this road that I'm walkin', I hear you talkin'\n[01:34.89]I know I'll find you soon\n[01:38.85]You've got everything I need\n[01:43.84]When I'm lost, it's only you I seek\n[01:48.96]You've got wings to set me free\n[01:53.98]When I doubt, you're makin' me believe\n[01:58.99]That angels can fall, angels can fall\n[02:08.40]I've been hurt and I've been left on the floor\n[02:18.42]You're the light that lifts me up through that open door\n[02:29.92]You've got everything I need\n[02:34.82]When I'm lost, it's only you I seek\n[02:39.96]You've got wings to set me free\n[02:45.08]When I doubt, you're makin' me believe\n[02:50.07]That angels can fall, angels can fall\n"
+    // },
     {
-        id: 29950496,
+        id: 1303027499,
         name: 'Angels',
-        singer: 'Joshua Radin',
-        src: "https://music.163.com/song/media/outer/url?id=29950496.mp3",
-        img: "https://p2.music.126.net/9FqM6gVM1te8atYZ5RKcpQ==/109951164853335450.jpg",
-        timeLength: 188731,
-        lyric: "[00:11.33]It's been a long time that I've been on my own, and I can't take no more\n[00:21.13]But these winds are changin'\n[00:23.66]They'll blow me through the storm until I see the shore\n[00:30.50]And I'm prayin' for someone to show me I'm not done\n[00:36.15]Sometimes I see your face\n[00:40.17]You've got everything I need\n[00:45.04]When I'm lost, it's only you I seek\n[00:50.21]You've got wings to set me free\n[00:55.30]When I doubt, you're makin' me believe\n[01:00.27]That angels can fall, angels can fall\n[01:09.97]And I'll cross the ocean\n[01:12.43]I'll walk the desert sand\n[01:14.84]I'll find those hills to climb\n[01:19.88]And I'll keep on searchin' 'cause I know you want to land\n[01:25.03]Into these arms of mine\n[01:29.25]On this road that I'm walkin', I hear you talkin'\n[01:34.89]I know I'll find you soon\n[01:38.85]You've got everything I need\n[01:43.84]When I'm lost, it's only you I seek\n[01:48.96]You've got wings to set me free\n[01:53.98]When I doubt, you're makin' me believe\n[01:58.99]That angels can fall, angels can fall\n[02:08.40]I've been hurt and I've been left on the floor\n[02:18.42]You're the light that lifts me up through that open door\n[02:29.92]You've got everything I need\n[02:34.82]When I'm lost, it's only you I seek\n[02:39.96]You've got wings to set me free\n[02:45.08]When I doubt, you're makin' me believe\n[02:50.07]That angels can fall, angels can fall\n"
+        singer: '棱镜',
+        src: "https://music.163.com/song/media/outer/url?id=1303027499.mp3",
+        img: "https://p2.music.126.net/RfUHXkanpxImcaGqFNWBeA==/109951163598901405.jpg",
+        timeLength: 270000,
+        lyric: "[00:00.000] 作词 : 高原/陈恒冠\n[00:01.000] 作曲 : 陈恒冠\n[00:02.10]编曲：陈恒冠\n[00:06.97]\n[00:13.58]从前我的另一边\n[00:18.14]通往凌晨的街\n[00:21.44]空无一人的世界\n[00:26.89]行影匆匆这些年\n[00:31.23]期望从未破灭\n[00:34.69]默不作响的时间\n[00:40.73]最好的人注定会到身边\n[00:47.23]孤注一掷的执念\n[00:53.84]我终将看到你身影逆光 出现\n[01:06.64]等这一切 都被你了解 十指错落相牵\n[01:20.29]跨越时间 再没有分别 携手走过明天\n[01:45.78]雨后路人化鱼鲔\n[01:50.29]欢愉游跃摇曳\n[01:52.89]灿烂一抱的世界\n[01:59.62]光芒捧起你的脸\n[02:03.33]我飞在云层间\n[02:06.63]狂奔向你不停歇\n[02:12.78]你说最好的人会到身边\n[02:19.33]此刻我也这样想\n[02:25.94]你终将看到我最美模样 出现\n[02:38.89]等这一切 都被你了解 十指错落相牵\n[02:52.19]跨越时间 再没有分别 携手走过明天\n[03:05.35]总会有些 幸运会出现 我等待这一天\n[03:18.59]总有艰险 哪怕是谎言 我等待你出现\n[03:31.73]等这一切 都被你了解 十指错落相牵\n[03:44.88]跨越时间 再没有分别 携手走过明天\n[03:57.70]等这一切 都被你了解 十指错落相牵\n[04:11.25]跨越时间 总会有一天 你出现我身边\n[04:12.25]\n[04:13.25]混音：陈恒家\n[04:14.25]封面：水吉\n[04:15.25]监制：1991与她\n"
     },
     // {
     //     id: 1294467974,

@@ -2,6 +2,7 @@ import { GlobalContext } from '@/layout/AppMain/context'
 import SwitchAnimate from '@components/SwitchAnimate'
 import { infoConfig } from '@/pages/About/config'
 import WeatherModal from '@components/Modal/weatherModal'
+import MusicModal from '@components/Modal/MusicModal'
 import { useState, useContext, useReducer } from 'react'
 import right from '@images/right.png'
 import { MusicIcon } from '@components/Icon'
@@ -78,14 +79,16 @@ const Item = () => {
                     <span>天气</span>
                 </div>
                 <div onClick={() => { dispatch({ type: 'showMusic' }) }} className='cursor-p'>
-                    {/* <div className='weather-icon'> */}
-                    {/* {context.weather} */}
                     <MusicIcon style={{ width: "64px", height: "64px" }} />
-                    {/* </div> */}
                     <span>音乐盒</span>
                 </div>
             </div>
 
+            <MusicModal
+                visible={state.musicVisible}
+                onOk={() => { dispatch({ type: 'init' }) }}
+                onCancel={() => dispatch({ type: 'init' })}
+            />
             <WeatherModal
                 visible={state.weatherVisible}
                 onOk={() => { dispatch({ type: 'init' }) }}

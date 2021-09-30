@@ -1,0 +1,84 @@
+/* 分页 css */
+.ethan-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: .8rem;
+    color: #666;
+
+    /*页数mixi 配置*/
+    .mixin-pagination() {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1rem;
+        height: 1rem;
+        background-color: white;
+        font-size: 1.2rem;
+        padding: .6rem;
+        border-radius: .2rem;
+        margin: 0 0.3rem;
+        box-shadow: .2rem .2rem .4rem #888;
+        border: 0.1rem solid transparent;
+        &:hover {
+            color: salmon;
+            border: .1rem solid lightsalmon;
+            padding: .8rem
+        }
+    }
+
+    /*页数mixi 配置 END*/
+
+    /*具体页数 css*/
+    .ethan-pagination-item {
+        display: flex;
+        // max-width: 28rem;
+        >div {
+            .mixin-pagination();
+        }
+        .ethan-pagination-item-select{
+            color: salmon;
+        }
+        .ethan-pagination-item-ellipsis{
+            &:hover {
+                border: 0.1rem solid transparent;
+                padding: .6rem;
+            }
+        }
+        .ethan-pagination-item-disabled{
+            cursor:not-allowed;
+            &:hover {
+                color: #666;
+                border: .1rem solid transparent;
+                padding: .6rem
+            }
+        }
+    }
+
+    /*具体页数 css END*/
+
+    /*数据总量 css */
+    .ethan-pagination-total {
+        color: #888;
+        margin-left: 1rem;
+    }
+
+    /*数据总量 css END*/
+}
+
+.ethan-pagination-center {
+    justify-content: center;
+}
+
+.ethan-pagination-left {
+    justify-content: flex-start;
+}
+
+.ethan-pagination-right {
+    justify-content: flex-end;
+}
+.ethan-pagination-hidden{
+    display: none;
+}
+/* 分页 css END*/

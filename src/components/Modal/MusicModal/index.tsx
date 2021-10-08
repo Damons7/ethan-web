@@ -4,6 +4,7 @@ import { TipPage, Button, Input, Pagination} from '@/common';
 import { searchMusic } from '@/api'
 import React, { useReducer, useEffect } from 'react'
 import './index.less'
+console.log(111222);
 
 // initState类型
 interface IMusicModal {

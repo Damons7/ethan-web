@@ -31,7 +31,7 @@ const MusicModal = (props: IMusicModal) => {
     const initState = {
         tipConfig: {
             isShow: true,
-            tip: "开启属于你的音乐盒子",
+            tip: "开启属于你的音乐盒子!",
             icon: <MusicBoxIcon style={{ width: '200px', height: '200px' }} />
         },
         inputVal: "",
